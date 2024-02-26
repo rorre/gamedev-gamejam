@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsku65uwrgymq"]
+
+[ext_resource type="Script" path="res://scenes/components/note.gd" id="1_662tr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcyb7"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Note" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1180.0
+offset_bottom = -700.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vcyb7")
+script = ExtResource("1_662tr")
