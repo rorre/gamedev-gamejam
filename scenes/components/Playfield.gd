@@ -41,8 +41,10 @@ func find_earliest_from_col(col: int):
 
 func handle_click(note: Node):
 	var delta = abs(note.time - current_time)
-	if delta > 200:
+	if delta > 250:
 		return false
+	elif delta > 200:
+		emit_signal("note_judged", 0)
 	elif delta > 150:
 		emit_signal("note_judged", 1)
 	elif delta > 100:
@@ -78,17 +80,28 @@ func _ready() -> void:
 
 func _process(delta: float):
 	var inputs = ["col_1", "col_2", "col_3", "col_4"]
+	var flashed_cols: Array[int] = []
 	var i = 0;
 	while i < 4:
 		var clicked = process_col(inputs[i], i)
 		if clicked:
 			for j in range(clicked.col, clicked.col + clicked.colsize):
+				flashed_cols.append(j)
 				flash_col(j)
 			i = clicked.col + clicked.colsize
 			continue
 		else:
 			i += 1
 
+	i = 0
+	while i < 4:
+		if i in flashed_cols:
+			# Throw inputs on big notes
+			Input.is_action_just_pressed(inputs[i])
+		elif Input.is_action_just_pressed(inputs[i]):
+			flash_col(i)
+		
+		i += 1
 
 func set_current_time(t):
 	current_time = t
@@ -130,7 +143,7 @@ func _on_note_judged(judgement: int) -> void:
 		message = "Perfect"
 	
 	$Judgement.text = message
-	var tween = create_tween()
-	tween.tween_property($Judgement, "transform:scale", Vector2(1.1, 1.1), 0.025)
-	tween.tween_property($Judgement, "transform:scale", Vector2(1.0, 1.0), 0.025)
-	tween.play()
+	#var tween = create_tween()
+	#tween.tween_property($Judgement, "transform:scale", Vector2(1.1, 1.1), 0.025)
+	#tween.tween_property($Judgement, "transform:scale", Vector2(1.0, 1.0), 0.025)
+	#tween.play()
