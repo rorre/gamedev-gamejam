@@ -1,10 +1,15 @@
 extends Node
 
+@export var audio_file: AudioStream
+@export var chart_file: Resource
+
 # [miss, good, great, perfect]
 var grades = [0,0,0,0]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AudioStreamPlayer.stream = audio_file
+	$Playfield.load_chart(chart_file)
 	$AudioStreamPlayer.play()
 
 
