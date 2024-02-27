@@ -1,4 +1,5 @@
 extends Node
+class_name Level
 
 @export var audio_file: AudioStream
 @export var chart_file: Resource

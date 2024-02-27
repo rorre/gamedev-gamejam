@@ -1,0 +1,99 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwfivfjthk05o"]
+
+[ext_resource type="Texture2D" uid="uid://dyvnl2aycs6q6" path="res://songs/childish/jacket.jpg" id="1_0wuci"]
+[ext_resource type="Script" path="res://scenes/components/song_box.gd" id="1_icuk8"]
+[ext_resource type="FontFile" uid="uid://b407p00l3rndu" path="res://assets/PressStart2P-Regular.ttf" id="2_1nqr2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xshh"]
+bg_color = Color(0.105882, 0.105882, 0.105882, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0m137"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[node name="SongBox" type="Panel"]
+custom_minimum_size = Vector2(350, 400)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -930.0
+offset_bottom = -320.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6xshh")
+script = ExtResource("1_icuk8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -166.0
+offset_right = 128.0
+offset_bottom = 166.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="BoxContainer" type="BoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/BoxContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture = ExtResource("1_0wuci")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1nqr2")
+theme_override_font_sizes/font_size = 25
+text = "コドモチック・フィロソフィ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Artist" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1nqr2")
+theme_override_font_sizes/font_size = 25
+text = "ああああ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 16.0
+offset_right = 320.0
+offset_bottom = 56.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0m137")
+
+[node name="Difficulty" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_1nqr2")
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1

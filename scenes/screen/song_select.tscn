@@ -1,0 +1,143 @@
+[gd_scene load_steps=5 format=3 uid="uid://043wek3jmqdm"]
+
+[ext_resource type="Script" path="res://scenes/screen/song_select.gd" id="1_4gcr3"]
+[ext_resource type="FontFile" uid="uid://b407p00l3rndu" path="res://assets/PressStart2P-Regular.ttf" id="1_v7qpd"]
+[ext_resource type="Texture2D" uid="uid://bwpocjkcg0pru" path="res://assets/arrow.png" id="2_tcvn8"]
+[ext_resource type="Texture2D" uid="uid://cgdq33qirijsl" path="res://assets/enter.png" id="3_a08x6"]
+
+[node name="Song Select" type="CanvasLayer"]
+script = ExtResource("1_4gcr3")
+
+[node name="TopSection" type="ColorRect" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 72.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Border" type="ColorRect" parent="TopSection"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -6.0
+offset_right = 640.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="TopSection"]
+layout_mode = 1
+offset_left = 15.0
+offset_right = 455.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("1_v7qpd")
+theme_override_font_sizes/font_size = 25
+text = "Song Select"
+vertical_alignment = 1
+
+[node name="BottomSection" type="ColorRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -72.0
+offset_right = 640.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Border" type="ColorRect" parent="BottomSection"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 6.0
+grow_horizontal = 2
+metadata/_edit_lock_ = true
+
+[node name="Left" type="Sprite2D" parent="BottomSection"]
+position = Vector2(32, 40)
+texture = ExtResource("2_tcvn8")
+metadata/_edit_lock_ = true
+
+[node name="Right" type="Sprite2D" parent="BottomSection"]
+position = Vector2(72, 40)
+rotation = -3.14159
+texture = ExtResource("2_tcvn8")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="BottomSection"]
+layout_mode = 2
+offset_left = 96.0
+offset_top = 24.0
+offset_right = 316.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("1_v7qpd")
+theme_override_font_sizes/font_size = 20
+text = "Change Song"
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Up" type="Sprite2D" parent="BottomSection"]
+position = Vector2(344, 40)
+rotation = 1.5708
+texture = ExtResource("2_tcvn8")
+metadata/_edit_lock_ = true
+
+[node name="Down" type="Sprite2D" parent="BottomSection"]
+position = Vector2(384, 40)
+rotation = -1.5708
+texture = ExtResource("2_tcvn8")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="BottomSection"]
+layout_mode = 2
+offset_left = 408.0
+offset_top = 24.0
+offset_right = 728.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("1_v7qpd")
+theme_override_font_sizes/font_size = 20
+text = "Change Difficulty"
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Label3" type="Label" parent="BottomSection"]
+layout_mode = 2
+offset_left = 784.0
+offset_top = 24.0
+offset_right = 1104.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("1_v7qpd")
+theme_override_font_sizes/font_size = 20
+text = "Start"
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Enter" type="Sprite2D" parent="BottomSection"]
+position = Vector2(760, 40)
+texture = ExtResource("3_a08x6")
+metadata/_edit_lock_ = true
+
+[node name="SongsContainer" type="VBoxContainer" parent="."]
+offset_top = 72.0
+offset_right = 1280.0
+offset_bottom = 648.0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SongsContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+alignment = 1
+
+[connection signal="song_selected" from="." to="." method="_on_song_selected"]
