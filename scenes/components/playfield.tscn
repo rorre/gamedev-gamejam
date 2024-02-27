@@ -19,6 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_t8kkp")
 
 [node name="BottomBar" type="ColorRect" parent="."]
+z_index = 30
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -35,6 +36,7 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Judgement1" type="ColorRect" parent="."]
+z_index = 30
 layout_mode = 0
 offset_top = 600.0
 offset_right = 100.0
@@ -44,6 +46,7 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Judgement2" type="ColorRect" parent="."]
+z_index = 30
 layout_mode = 0
 offset_left = 100.0
 offset_top = 600.0
@@ -54,6 +57,7 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Judgement3" type="ColorRect" parent="."]
+z_index = 30
 layout_mode = 0
 offset_left = 200.0
 offset_top = 600.0
@@ -64,6 +68,7 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Judgement4" type="ColorRect" parent="."]
+z_index = 30
 layout_mode = 0
 offset_left = 300.0
 offset_top = 600.0
@@ -75,6 +80,7 @@ metadata/_edit_lock_ = true
 
 [node name="FlashRow1" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
+z_index = 30
 layout_mode = 0
 offset_right = 100.0
 offset_bottom = 600.0
@@ -82,6 +88,7 @@ metadata/_edit_group_ = true
 
 [node name="FlashRow2" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
+z_index = 30
 layout_mode = 0
 offset_left = 100.0
 offset_right = 200.0
@@ -90,6 +97,7 @@ metadata/_edit_group_ = true
 
 [node name="FlashRow3" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
+z_index = 30
 layout_mode = 0
 offset_left = 200.0
 offset_right = 300.0
@@ -98,6 +106,7 @@ metadata/_edit_group_ = true
 
 [node name="FlashRow4" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
+z_index = 30
 layout_mode = 0
 offset_left = 300.0
 offset_right = 400.0
@@ -105,6 +114,7 @@ offset_bottom = 600.0
 metadata/_edit_group_ = true
 
 [node name="Judgement" type="Label" parent="."]
+z_index = 30
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
