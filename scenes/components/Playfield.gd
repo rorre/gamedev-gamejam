@@ -16,27 +16,6 @@ enum InputType {
 	HOLD
 }
 
-# Called when the node enters the scene tree for the first time.
-func _init():
-	var chart_str = FileAccess.get_file_as_string("res://master.json")
-	var chart = JSON.new()
-	chart.parse(chart_str)
-
-	var objects = chart.data["objects"]
-	for data in objects:
-		var obj: Note = note.instantiate()
-		obj.col = data[0]
-		obj.time = data[1]
-		obj.colsize = data[3]
-		obj.end_time = data[4]
-		obj.set_type(data[2])
-		
-		if data[2] == "slider":
-			generate_ticks(obj)
-		
-		queue.append(obj)
-		add_child(obj)
-
 
 func generate_ticks(slider: Note):
 	var start = slider.time
@@ -63,7 +42,7 @@ func find_earliest_from_col(note_queue: Array[Note], col: int):
 func handle_click(note: Node):
 	var delta = abs(current_time - note.time)
 	if note.type == 3:
-		if delta < 100:
+		if delta < 100 and not note.clicked:
 			note.clicked = true
 			note.queue_free()
 			emit_signal("note_judged", 3)
@@ -114,6 +93,30 @@ func flash_col(i: int):
 
 func _ready() -> void:
 	flashes = [$FlashRow1, $FlashRow2, $FlashRow3, $FlashRow4]
+
+func load_chart(chart_file: Resource):
+	# Reset states
+	queue = []
+	ticks_queue = []
+	
+	var chart_str = FileAccess.get_file_as_string(chart_file.resource_path)
+	var chart = JSON.new()
+	chart.parse(chart_str)
+
+	var objects = chart.data["objects"]
+	for data in objects:
+		var obj: Note = note.instantiate()
+		obj.col = data[0]
+		obj.time = data[1]
+		obj.colsize = data[3]
+		obj.end_time = data[4]
+		obj.set_type(data[2])
+		
+		if data[2] == "slider":
+			generate_ticks(obj)
+		
+		queue.append(obj)
+		add_child(obj)
 
 
 func _process_click():
