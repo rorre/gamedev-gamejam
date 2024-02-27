@@ -6,41 +6,70 @@ signal note_judged(judgement)
 @export var ms_window: int = 500
 
 var flashes: Array[ColorRect]
-var queue: Array[Node] = [];
-var note = preload("res://scenes/components/note.tscn")
+var queue: Array[Note] = [];
+var ticks_queue: Array[Note] = [];
+const note = preload("res://scenes/components/note.tscn")
+const inputs = ["col_1", "col_2", "col_3", "col_4"]
 
+enum InputType {
+	TAP,
+	HOLD
+}
 
 # Called when the node enters the scene tree for the first time.
 func _init():
 	var chart_str = FileAccess.get_file_as_string("res://master.json")
 	var chart = JSON.new()
-	var err = chart.parse(chart_str)
+	chart.parse(chart_str)
 
 	var objects = chart.data["objects"]
 	for data in objects:
-		var obj = note.instantiate()
+		var obj: Note = note.instantiate()
 		obj.col = data[0]
 		obj.time = data[1]
 		obj.colsize = data[3]
 		obj.end_time = data[4]
 		obj.set_type(data[2])
 		
+		if data[2] == "slider":
+			generate_ticks(obj)
+		
 		queue.append(obj)
 		add_child(obj)
 
 
-func find_earliest_from_col(col: int):
-	for obj in queue:
-		if (
-			obj.type == 2
-			and (obj.col == col or (obj.col < col and obj.col + obj.colsize - 1 >= col))
-		):
+func generate_ticks(slider: Note):
+	var start = slider.time
+	var end = slider.end_time
+	for i in range(start, end, 100):
+		var tick: Note = note.instantiate()
+		tick.time = i
+		tick.col = slider.col
+		tick.colsize = slider.colsize
+		tick.end_time = i
+		tick.parent = slider
+		tick.set_type("tick")
+		
+		ticks_queue.append(tick)
+
+
+func find_earliest_from_col(note_queue: Array[Note], col: int):
+	for obj in note_queue:
+		if obj.type != 1 and obj.is_valid_click(col):
 			return obj
 	return null
 
 
 func handle_click(note: Node):
-	var delta = abs(note.time - current_time)
+	var delta = abs(current_time - note.time)
+	if note.type == 3:
+		if delta < 100:
+			note.clicked = true
+			note.queue_free()
+			emit_signal("note_judged", 3)
+			return true
+		return false
+			
 	if delta > 250:
 		return false
 	elif delta > 200:
@@ -57,9 +86,18 @@ func handle_click(note: Node):
 	return true
 
 
-func process_col(input_name: StringName, idx: int):	
-	if Input.is_action_just_pressed(input_name):
-		var earliest = find_earliest_from_col(idx)
+func process_col(input_name: StringName, idx: int, method: InputType):	
+	var is_valid: bool
+	var note_queue: Array[Note]
+	if method == InputType.TAP:
+		is_valid = Input.is_action_just_pressed(input_name)
+		note_queue = queue
+	elif method == InputType.HOLD:
+		is_valid = Input.is_action_pressed(input_name)
+		note_queue = ticks_queue
+		
+	if is_valid:
+		var earliest = find_earliest_from_col(note_queue, idx)
 		if earliest:
 			var success = handle_click(earliest)
 			if success:
@@ -78,12 +116,11 @@ func _ready() -> void:
 	flashes = [$FlashRow1, $FlashRow2, $FlashRow3, $FlashRow4]
 
 
-func _process(delta: float):
-	var inputs = ["col_1", "col_2", "col_3", "col_4"]
+func _process_click():
 	var flashed_cols: Array[int] = []
 	var i = 0;
 	while i < 4:
-		var clicked = process_col(inputs[i], i)
+		var clicked = process_col(inputs[i], i, InputType.TAP)
 		if clicked:
 			for j in range(clicked.col, clicked.col + clicked.colsize):
 				flashed_cols.append(j)
@@ -103,8 +140,18 @@ func _process(delta: float):
 		
 		i += 1
 
-func set_current_time(t):
-	current_time = t
+
+func _process_hold():
+	for i in range(4):
+		process_col(inputs[i], i, InputType.HOLD)
+
+
+func _process(delta: float):
+	_process_click()
+	_process_hold()
+	
+
+func _handle_notes(t: float):
 	var i = 0
 	while true:
 		if i >= len(queue):
@@ -131,6 +178,31 @@ func set_current_time(t):
 		note.position = Vector2(orig.x, 605 * (1.0 - (note.time - t) / ms_window) - orig_size.y)
 		i += 1
 
+func _handle_holds(t: float):
+	var i = 0
+	while true:
+		if i >= len(ticks_queue):
+			break
+		
+		var note = ticks_queue[i]
+		if not is_instance_valid(note) or note.clicked:
+			ticks_queue.remove_at(i)
+			continue
+
+		# 100ms buffer :>
+		if t > note.time + 100:
+			note.queue_free()
+			ticks_queue.remove_at(i)
+			
+			if not note.clicked:
+				emit_signal("note_judged", 0)
+			continue
+		i += 1
+
+func set_current_time(t):
+	current_time = t
+	_handle_notes(t)
+	_handle_holds(t)
 
 
 func _on_note_judged(judgement: int) -> void:
@@ -140,10 +212,6 @@ func _on_note_judged(judgement: int) -> void:
 	elif judgement == 2:
 		message = "Great"
 	elif judgement == 3:
-		message = "Perfect"
+		message = ""
 	
 	$Judgement.text = message
-	#var tween = create_tween()
-	#tween.tween_property($Judgement, "transform:scale", Vector2(1.1, 1.1), 0.025)
-	#tween.tween_property($Judgement, "transform:scale", Vector2(1.0, 1.0), 0.025)
-	#tween.play()

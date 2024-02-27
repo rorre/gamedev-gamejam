@@ -1,8 +1,10 @@
 extends Panel
+class_name Note
 
 enum NoteType {
 	SLIDER = 1,
-	NOTE = 2
+	NOTE = 2,
+	TICK = 3
 }
 
 @export var time: int = 0
@@ -11,6 +13,7 @@ enum NoteType {
 @export var colsize: int = 1
 @export var col: int = 0
 @export var clicked: bool = false
+@export var parent: Note
 
 var slider_added = false;
 const WIDTH = 100;
@@ -33,6 +36,8 @@ func _process(delta):
 func set_type(t: String):
 	if t == "note":
 		type = NoteType.NOTE
+	elif t == "tick":
+		type = NoteType.TICK
 	else:
 		type = NoteType.SLIDER
 		x_size = colsize * WIDTH
@@ -47,3 +52,7 @@ func set_type(t: String):
 		style.corner_radius_top_right = 10
 		style.bg_color.a = 0.25
 		add_theme_stylebox_override("panel", style)
+
+func is_valid_click(clickCol: int):
+	return col == clickCol or (col < clickCol and col + colsize - 1 >= clickCol)
+	
