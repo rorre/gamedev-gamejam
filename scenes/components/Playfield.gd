@@ -32,14 +32,14 @@ func generate_ticks(slider: Note):
 		ticks_queue.append(tick)
 
 
-func find_earliest_from_col(note_queue: Array[Note], col: int):
+func find_earliest_from_col(note_queue: Array[Note], col: int) -> Note:
 	for obj in note_queue:
-		if is_instance_valid(obj) and obj.is_valid_click(col):
+		if is_instance_valid(obj) and obj.is_valid_click(col) and not obj.clicked:
 			return obj
 	return null
 
 
-func handle_click(note: Node):
+func handle_click(note: Node) -> bool:
 	var delta = abs(current_time - note.time)
 	if note.type == 3:
 		if delta < 100 and not note.clicked:
@@ -66,7 +66,7 @@ func handle_click(note: Node):
 	return true
 
 
-func process_col(input_name: StringName, idx: int, method: InputType):	
+func process_col(input_name: StringName, idx: int, method: InputType) -> Note:	
 	var is_valid: bool
 	var note_queue: Array[Note]
 	if method == InputType.TAP:
@@ -147,7 +147,9 @@ func _process_click():
 
 func _process_hold():
 	for i in range(4):
-		process_col(inputs[i], i, InputType.HOLD)
+		var tick = process_col(inputs[i], i, InputType.HOLD)
+		if tick:
+			tick.parent.modulate.a = 1
 
 
 func _process(delta: float):
@@ -205,6 +207,7 @@ func _handle_holds(t: float):
 			ticks_queue.remove_at(i)
 			
 			if not note.clicked:
+				note.parent.modulate.a = 0.5
 				emit_signal("note_judged", 0)
 			continue
 		i += 1
