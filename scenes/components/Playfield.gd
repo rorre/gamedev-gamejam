@@ -86,6 +86,9 @@ func process_col(input_name: StringName, idx: int, method: InputType) -> Note:
 
 
 func flash_col(i: int):
+	if i < 0 or i > 3:
+		return
+
 	var tween = create_tween()
 	tween.tween_property(flashes[i], "modulate:a", 0.5, 0.075)
 	tween.tween_property(flashes[i], "modulate:a", 0.0, 0.075)
@@ -119,6 +122,11 @@ func load_chart(chart_file: Resource):
 		queue.append(obj)
 		add_child(obj)
 
+	ticks_queue.sort_custom(compare_note_time)
+	queue.sort_custom(compare_note_time)
+
+func compare_note_time(a: Note, b: Note):
+	return a.time < b.time
 
 var previous_flashed: Array[int] = []
 func _process_click():
@@ -173,6 +181,11 @@ func _handle_notes(t: float):
 
 		if note.time > t + ms_window:
 			break
+		
+		# Fix for LN if head is missed, just assume clicked
+		# so the other parts of the code didnt always pick this
+		if t - note.time > 200 and note.type == 1:
+			note.clicked = true
 
 		if t - note.time > 200 and t - note.end_time > 200:
 			note.queue_free()
@@ -210,7 +223,8 @@ func _handle_holds(t: float):
 			ticks_queue.remove_at(i)
 			
 			if not note.clicked:
-				note.parent.modulate.a = 0.5
+				if is_instance_valid(note.parent):
+					note.parent.modulate.a = 0.5
 				emit_signal("note_judged", 0)
 			continue
 		i += 1

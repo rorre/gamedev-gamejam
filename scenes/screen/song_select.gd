@@ -10,6 +10,10 @@ var songs: Array[Song] = [
 		"audio": "res://songs/childish/audio.mp3",
 		"difficulties": [
 			{
+				"rating": "7",
+				"chart": "res://songs/childish/advanced.json"
+			},
+			{
 				"rating": "10",
 				"chart": "res://songs/childish/expert.json"
 			}
@@ -24,6 +28,18 @@ var songs: Array[Song] = [
 			{
 				"rating": "15",
 				"chart": "res://songs/fd/master.json"
+			}
+		]
+	}),
+	Song.parse_json({
+		"artist": "iyowa",
+		"title": "一千光年,",
+		"jacket": "res://songs/issen_kounen/jacket.png",
+		"audio": "res://songs/issen_kounen/audio.mp3",
+		"difficulties": [
+			{
+				"rating": "?",
+				"chart": "res://songs/issen_kounen/append.json"
 			}
 		]
 	})
@@ -62,5 +78,5 @@ func _process(delta: float) -> void:
 	
 	selected_difficulty = clamp(selected_difficulty, 0, len(songs[selected_idx].difficulties) - 1)
 	for box in boxes:
-		box.diff_idx = clamp(selected_difficulty, 0, len(box.song.difficulties) - 1)
+		box.set_diff_idx(clamp(selected_difficulty, 0, len(box.song.difficulties) - 1))
 
