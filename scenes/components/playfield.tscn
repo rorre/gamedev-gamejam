@@ -41,9 +41,8 @@ layout_mode = 0
 offset_top = 600.0
 offset_right = 100.0
 offset_bottom = 610.0
-color = Color(0.466667, 0.466667, 0.466667, 1)
+color = Color(0.356863, 0.807843, 0.980392, 1)
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="Judgement2" type="ColorRect" parent="."]
 z_index = 30
@@ -52,9 +51,8 @@ offset_left = 100.0
 offset_top = 600.0
 offset_right = 200.0
 offset_bottom = 610.0
-color = Color(0.666667, 0.666667, 0.666667, 1)
+color = Color(0.356863, 0.807843, 0.980392, 1)
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="Judgement3" type="ColorRect" parent="."]
 z_index = 30
@@ -63,9 +61,8 @@ offset_left = 200.0
 offset_top = 600.0
 offset_right = 300.0
 offset_bottom = 610.0
-color = Color(0.466667, 0.466667, 0.466667, 1)
+color = Color(0.960784, 0.662745, 0.721569, 1)
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="Judgement4" type="ColorRect" parent="."]
 z_index = 30
@@ -74,9 +71,8 @@ offset_left = 300.0
 offset_top = 600.0
 offset_right = 400.0
 offset_bottom = 610.0
-color = Color(0.666667, 0.666667, 0.666667, 1)
+color = Color(0.960784, 0.662745, 0.721569, 1)
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="FlashRow1" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -84,6 +80,7 @@ z_index = 30
 layout_mode = 0
 offset_right = 100.0
 offset_bottom = 600.0
+color = Color(0.356863, 0.807843, 0.980392, 1)
 metadata/_edit_group_ = true
 
 [node name="FlashRow2" type="ColorRect" parent="."]
@@ -93,6 +90,7 @@ layout_mode = 0
 offset_left = 100.0
 offset_right = 200.0
 offset_bottom = 600.0
+color = Color(0.356863, 0.807843, 0.980392, 1)
 metadata/_edit_group_ = true
 
 [node name="FlashRow3" type="ColorRect" parent="."]
@@ -102,6 +100,7 @@ layout_mode = 0
 offset_left = 200.0
 offset_right = 300.0
 offset_bottom = 600.0
+color = Color(0.960784, 0.662745, 0.721569, 1)
 metadata/_edit_group_ = true
 
 [node name="FlashRow4" type="ColorRect" parent="."]
@@ -111,6 +110,7 @@ layout_mode = 0
 offset_left = 300.0
 offset_right = 400.0
 offset_bottom = 600.0
+color = Color(0.960784, 0.662745, 0.721569, 1)
 metadata/_edit_group_ = true
 
 [node name="Judgement" type="Label" parent="."]
