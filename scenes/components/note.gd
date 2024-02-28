@@ -14,6 +14,7 @@ enum NoteType {
 @export var col: int = 0
 @export var clicked: bool = false
 @export var parent: Note
+@export var margin: int = 2
 
 var slider_added = false;
 const WIDTH = 100;
@@ -48,7 +49,7 @@ func configure_style():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var new_height = px_per_ms * max((end_time - time), 10)
-	x_size = colsize * WIDTH
+	x_size = colsize * WIDTH - margin
 	set_size(Vector2(x_size, new_height))
 	set_position(Vector2(100 * col, -new_height))
 	configure_style()
