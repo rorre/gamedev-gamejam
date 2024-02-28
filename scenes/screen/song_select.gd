@@ -17,15 +17,15 @@ var songs: Array[Song] = [
 			]
 		}
 	),
-	Song.parse_json(
-		{
-			"artist": "xi",
-			"title": "FREEDOM DiVE",
-			"jacket": "res://songs/fd/jacket.png",
-			"audio": "res://songs/fd/audio.mp3",
-			"difficulties": [{"rating": "15", "chart": "res://songs/fd/master.json"}]
-		}
-	),
+	#Song.parse_json(
+		#{
+			#"artist": "xi",
+			#"title": "FREEDOM DiVE",
+			#"jacket": "res://songs/fd/jacket.png",
+			#"audio": "res://songs/fd/audio.mp3",
+			#"difficulties": [{"rating": "15", "chart": "res://songs/fd/master.json"}]
+		#}
+	#),
 	Song.parse_json(
 		{
 			"artist": "iyowa",
