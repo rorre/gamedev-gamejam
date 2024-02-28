@@ -10,12 +10,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_song_select_song_selected(song: Variant, diff: Variant) -> void:
-	print(song, diff)
+func _on_song_select_song_selected(song: Song, diff: Difficulty) -> void:
 	var new_level: Level = level.instantiate()
-	new_level.audio_file = load(song["audio"])
-	new_level.chart_file = load(song["difficulties"][diff]["chart"])
+	new_level.song = song
+	new_level.difficulty = diff
 	
-	print("wat")
 	add_child(new_level)
 	$"Song Select".queue_free()
+	new_level.start()

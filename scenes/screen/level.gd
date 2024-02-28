@@ -1,16 +1,16 @@
 extends Node
 class_name Level
 
-@export var audio_file: AudioStream
-@export var chart_file: Resource
+@export var song: Song
+@export var difficulty: Difficulty
 
 # [miss, good, great, perfect]
 var grades = [0,0,0,0]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$AudioStreamPlayer.stream = audio_file
-	$Playfield.load_chart(chart_file)
+	$AudioStreamPlayer.stream = load(song.audio)
+	$Playfield.load_chart(load(difficulty.chart))
 
 
 func start():

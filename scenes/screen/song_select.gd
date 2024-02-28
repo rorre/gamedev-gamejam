@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-signal song_selected(song, diff)
+signal song_selected(song: Song, diff: Difficulty)
 
 var songs: Array[Song] = [
 	Song.parse_json({
@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 	elif Input.is_action_just_pressed("ui_down"):
 		selected_difficulty = selected_difficulty - 1
 	elif Input.is_action_just_pressed("ui_accept"):
-		song_selected.emit(songs[selected_idx], selected_difficulty)
+		song_selected.emit(songs[selected_idx], songs[selected_idx].difficulties[selected_difficulty])
 		
 	for box in boxes:
 		box.scale = Vector2(1, 1)

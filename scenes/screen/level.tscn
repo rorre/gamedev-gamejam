@@ -1,15 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://q87xujn1agel"]
+[gd_scene load_steps=4 format=3 uid="uid://q87xujn1agel"]
 
-[ext_resource type="AudioStream" uid="uid://6svp56fwcsgk" path="res://songs/fd/audio.mp3" id="1_w444h"]
 [ext_resource type="Script" path="res://scenes/screen/level.gd" id="1_x7rfd"]
 [ext_resource type="PackedScene" uid="uid://c4umqkumq3adi" path="res://scenes/components/playfield.tscn" id="2_82881"]
-[ext_resource type="JSON" path="res://songs/fd/master.json" id="3_sikck"]
 [ext_resource type="FontFile" uid="uid://b407p00l3rndu" path="res://assets/PressStart2P-Regular.ttf" id="4_qkeaq"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_x7rfd")
-audio_file = ExtResource("1_w444h")
-chart_file = ExtResource("3_sikck")
 
 [node name="Playfield" parent="." instance=ExtResource("2_82881")]
 
