@@ -3,7 +3,7 @@ extends Node
 signal speed_change(new_speed: int)
 
 
-@export var speed: int = 10
+@export var speed: int = 5
 var ms_window = 50 * (20 - speed)
 
 func set_speed(new_speed: int):
