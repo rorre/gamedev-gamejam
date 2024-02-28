@@ -11,6 +11,7 @@ var songs: Array[Song] = [
 			"audio": "res://songs/childish/audio.mp3",
 			"difficulties":
 			[
+				{"rating": "3", "chart": "res://songs/childish/beginner.json"},
 				{"rating": "7", "chart": "res://songs/childish/advanced.json"},
 				{"rating": "10", "chart": "res://songs/childish/expert.json"}
 			]

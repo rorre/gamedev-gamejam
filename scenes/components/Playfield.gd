@@ -3,7 +3,7 @@ extends Control
 signal note_judged(judgement)
 
 @export var current_time: int = 0
-@export var ms_window: int = 500
+
 
 var flashes: Array[ColorRect]
 var queue: Array[Note] = []
@@ -12,6 +12,7 @@ const note = preload("res://scenes/components/note.tscn")
 const inputs = ["col_1", "col_2", "col_3", "col_4"]
 
 enum InputType { TAP, HOLD }
+
 
 
 func generate_ticks(slider: Note):
@@ -181,7 +182,7 @@ func _handle_notes(t: float):
 			queue.remove_at(i)
 			continue
 
-		if note.time > t + ms_window:
+		if note.time > t + UserSettings.ms_window:
 			break
 
 		# Fix for LN if head is missed, just assume clicked
@@ -197,12 +198,12 @@ func _handle_notes(t: float):
 				emit_signal("note_judged", 0)
 			continue
 
-		if not note.visible and note.time - t < 700:
+		if not note.visible and note.time - t < (UserSettings.ms_window + 200):
 			note.visible = true
 
 		var orig: Vector2 = note.position
 		var orig_size: Vector2 = note.size
-		note.position = Vector2(orig.x, 605 * (1.0 - (note.time - t) / ms_window) - orig_size.y)
+		note.position = Vector2(orig.x, 605 * (1.0 - (note.time - t) / UserSettings.ms_window) - orig_size.y)
 		i += 1
 
 
@@ -217,7 +218,7 @@ func _handle_holds(t: float):
 			ticks_queue.remove_at(i)
 			continue
 
-		if note.time > t + ms_window:
+		if note.time > t + UserSettings.ms_window:
 			break
 
 		# 100ms buffer :>

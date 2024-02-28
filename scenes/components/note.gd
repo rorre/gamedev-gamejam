@@ -15,8 +15,20 @@ enum NoteType { SLIDER = 1, NOTE = 2, TICK = 3 }
 var slider_added = false
 const WIDTH = 100
 const HEIGHT = 10
-const px_per_ms = 605 / 500.0
-var x_size
+
+
+func update_note_size() -> Vector2:
+	var x_size = colsize * WIDTH - margin
+	var px_per_ms = 605.0 / UserSettings.ms_window
+	var size: Vector2
+	if type == NoteType.SLIDER:
+		var new_height = px_per_ms * (end_time - time)
+		size = Vector2(x_size, new_height)
+	else:
+		var new_height = 10
+		size = Vector2(x_size, new_height)
+	set_size(size)
+	return size
 
 
 func configure_style():
@@ -46,12 +58,12 @@ func configure_style():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var new_height = px_per_ms * max(end_time - time, 10)
-	x_size = colsize * WIDTH - margin
-	set_size(Vector2(x_size, new_height))
-	set_position(Vector2(100 * col, -new_height))
+	var new_size = update_note_size()
+	set_position(Vector2(100 * col, -new_size.y))
 	configure_style()
 	hide()
+	
+	UserSettings.speed_change.connect(func (_speed): return update_note_size())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -66,9 +78,7 @@ func set_type(t: String):
 		type = NoteType.TICK
 	else:
 		type = NoteType.SLIDER
-		x_size = colsize * WIDTH
-		var new_height = px_per_ms * (end_time - time)
-		set_size(Vector2(x_size, new_height))
+		update_note_size()
 
 
 func is_valid_click(clickCol: int):
