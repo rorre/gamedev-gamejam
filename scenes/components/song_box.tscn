@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://7e16sc06y4ss" path="res://assets/MintsodaLimeGreen13X16Regular-4n30l.ttf" id="3_rn3ny"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xshh"]
-bg_color = Color(0.105882, 0.105882, 0.105882, 1)
+bg_color = Color(0.211765, 0.211765, 0.211765, 1)
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
