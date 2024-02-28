@@ -19,7 +19,7 @@ enum NoteType {
 var slider_added = false;
 const WIDTH = 100;
 const HEIGHT = 10
-const px_per_ms = (605 - HEIGHT) / 500.0
+const px_per_ms = 605 / 500.0
 var x_size
 
 func configure_style():
