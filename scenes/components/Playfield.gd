@@ -34,7 +34,7 @@ func generate_ticks(slider: Note):
 
 func find_earliest_from_col(note_queue: Array[Note], col: int):
 	for obj in note_queue:
-		if obj.type != 1 and obj.is_valid_click(col):
+		if is_instance_valid(obj) and obj.is_valid_click(col):
 			return obj
 	return null
 
@@ -61,7 +61,8 @@ func handle_click(note: Node):
 		emit_signal("note_judged", 3)
 
 	note.clicked = true
-	note.queue_free()
+	if note.type == 2:
+		note.queue_free()
 	return true
 
 
@@ -161,9 +162,12 @@ func _handle_notes(t: float):
 			break
 		
 		var note = queue[i]
-		if not is_instance_valid(note) or note.clicked:
+		if not is_instance_valid(note) or (note.clicked and note.type != 1):
 			queue.remove_at(i)
 			continue
+
+		if note.time > t + ms_window:
+			break
 
 		if t - note.time > 200 and t - note.end_time > 200:
 			note.queue_free()
@@ -192,6 +196,9 @@ func _handle_holds(t: float):
 			ticks_queue.remove_at(i)
 			continue
 
+		if note.time > t + ms_window:
+			break
+			
 		# 100ms buffer :>
 		if t > note.time + 100:
 			note.queue_free()
