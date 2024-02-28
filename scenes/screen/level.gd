@@ -11,6 +11,9 @@ var grades = [0,0,0,0]
 func _ready():
 	$AudioStreamPlayer.stream = audio_file
 	$Playfield.load_chart(chart_file)
+
+
+func start():
 	$AudioStreamPlayer.play()
 
 
@@ -30,3 +33,7 @@ func _on_playfield_note_judged(judgement: int) -> void:
 	var acc = (grades[3] * 1 + grades[2] * 0.75 + grades[1] * 0.5) / sum_notes * 100
 	var rounded = snapped(acc, 0.01)
 	$CanvasLayer/Accuracy.text = str(rounded) + "%"
+
+
+func _on_audio_stream_player_finished():
+	pass # Replace with function body.

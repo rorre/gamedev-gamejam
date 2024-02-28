@@ -1,17 +1,17 @@
 extends Panel
 class_name SongBox
 
-@export var title: String
-@export var artist: String
-@export var difficulty: int
-@export var jacket: Resource
+@export var song: Song
+@export var diff_idx: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$VBoxContainer/Artist.text = artist
-	$VBoxContainer/Title.text = title
-	$Panel/Difficulty.text = str(difficulty)
-	$VBoxContainer/BoxContainer/TextureRect.texture = jacket
+	print(song.difficulties)
+	print(diff_idx)
+	$VBoxContainer/Artist.text = song.artist
+	$VBoxContainer/Title.text = song.title
+	$Panel/Difficulty.text = song.difficulties[diff_idx].rating
+	$VBoxContainer/BoxContainer/TextureRect.texture = load(song.jacket)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

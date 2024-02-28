@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwfivfjthk05o"]
+[gd_scene load_steps=7 format=3 uid="uid://dwfivfjthk05o"]
 
 [ext_resource type="Texture2D" uid="uid://dyvnl2aycs6q6" path="res://songs/childish/jacket.jpg" id="1_0wuci"]
 [ext_resource type="Script" path="res://scenes/components/song_box.gd" id="1_icuk8"]
 [ext_resource type="FontFile" uid="uid://b407p00l3rndu" path="res://assets/PressStart2P-Regular.ttf" id="2_1nqr2"]
+[ext_resource type="FontFile" uid="uid://7e16sc06y4ss" path="res://assets/MintsodaLimeGreen13X16Regular-4n30l.ttf" id="3_rn3ny"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xshh"]
 bg_color = Color(0.105882, 0.105882, 0.105882, 1)
@@ -59,16 +60,16 @@ metadata/_edit_lock_ = true
 
 [node name="Title" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_1nqr2")
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("3_rn3ny")
+theme_override_font_sizes/font_size = 20
 text = "コドモチック・フィロソフィ"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Artist" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_1nqr2")
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("3_rn3ny")
+theme_override_font_sizes/font_size = 20
 text = "ああああ"
 horizontal_alignment = 1
 vertical_alignment = 1
