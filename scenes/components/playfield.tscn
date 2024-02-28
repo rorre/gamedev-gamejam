@@ -3,8 +3,7 @@
 [ext_resource type="Script" path="res://scenes/components/Playfield.gd" id="1_t8kkp"]
 [ext_resource type="FontFile" uid="uid://b407p00l3rndu" path="res://assets/PressStart2P-Regular.ttf" id="2_u5hcf"]
 
-[node name="Playfield" type="Control"]
-layout_mode = 3
+[node name="Playfield" type="ColorRect"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -16,6 +15,7 @@ offset_right = 200.0
 offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.211765, 0.211765, 0.211765, 1)
 script = ExtResource("1_t8kkp")
 
 [node name="BottomBar" type="ColorRect" parent="."]
@@ -43,6 +43,7 @@ offset_right = 100.0
 offset_bottom = 610.0
 color = Color(0.356863, 0.807843, 0.980392, 1)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Judgement2" type="ColorRect" parent="."]
 z_index = 30
@@ -53,6 +54,7 @@ offset_right = 200.0
 offset_bottom = 610.0
 color = Color(0.356863, 0.807843, 0.980392, 1)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Judgement3" type="ColorRect" parent="."]
 z_index = 30
@@ -63,6 +65,7 @@ offset_right = 300.0
 offset_bottom = 610.0
 color = Color(0.960784, 0.662745, 0.721569, 1)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Judgement4" type="ColorRect" parent="."]
 z_index = 30
@@ -73,6 +76,7 @@ offset_right = 400.0
 offset_bottom = 610.0
 color = Color(0.960784, 0.662745, 0.721569, 1)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="FlashRow1" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -82,6 +86,7 @@ offset_right = 100.0
 offset_bottom = 600.0
 color = Color(0.356863, 0.807843, 0.980392, 1)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="FlashRow2" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -92,6 +97,7 @@ offset_right = 200.0
 offset_bottom = 600.0
 color = Color(0.356863, 0.807843, 0.980392, 1)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="FlashRow3" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -102,6 +108,7 @@ offset_right = 300.0
 offset_bottom = 600.0
 color = Color(0.960784, 0.662745, 0.721569, 1)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="FlashRow4" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -112,6 +119,7 @@ offset_right = 400.0
 offset_bottom = 600.0
 color = Color(0.960784, 0.662745, 0.721569, 1)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Judgement" type="Label" parent="."]
 z_index = 30
@@ -129,5 +137,6 @@ grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_u5hcf")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [connection signal="note_judged" from="." to="." method="_on_note_judged"]
