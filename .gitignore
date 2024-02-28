@@ -4,3 +4,4 @@ songs/
 *.txt
 *.osu
 *.json
+dist/
