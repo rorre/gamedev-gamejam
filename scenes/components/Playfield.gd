@@ -120,10 +120,15 @@ func load_chart(chart_file: Resource):
 		add_child(obj)
 
 
+var previous_flashed: Array[int] = []
 func _process_click():
 	var flashed_cols: Array[int] = []
 	var i = 0;
 	while i < 4:
+		if i in previous_flashed:
+			i += 1
+			continue
+		
 		var clicked = process_col(inputs[i], i, InputType.TAP)
 		if clicked:
 			for j in range(clicked.col, clicked.col + clicked.colsize):
@@ -131,18 +136,16 @@ func _process_click():
 				flash_col(j)
 			i = clicked.col + clicked.colsize
 			continue
-		else:
-			i += 1
+		
+		i += 1
 
 	i = 0
 	while i < 4:
-		if i in flashed_cols:
-			# Throw inputs on big notes
-			Input.is_action_just_pressed(inputs[i])
-		elif Input.is_action_just_pressed(inputs[i]):
+		if Input.is_action_just_pressed(inputs[i]):
 			flash_col(i)
-		
 		i += 1
+	
+	previous_flashed = flashed_cols
 
 
 func _process_hold():
