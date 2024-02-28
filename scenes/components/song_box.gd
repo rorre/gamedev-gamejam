@@ -6,8 +6,6 @@ class_name SongBox
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print(song.difficulties)
-	print(diff_idx)
 	$VBoxContainer/Artist.text = song.artist
 	$VBoxContainer/Title.text = song.title
 	$Panel/Difficulty.text = song.difficulties[diff_idx].rating

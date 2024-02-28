@@ -1,11 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://3sj2iv3kij85"]
+[gd_scene load_steps=4 format=3 uid="uid://3sj2iv3kij85"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_dwv6n"]
 [ext_resource type="PackedScene" uid="uid://043wek3jmqdm" path="res://scenes/screen/song_select.tscn" id="1_nrhd0"]
+[ext_resource type="PackedScene" uid="uid://q87xujn1agel" path="res://scenes/screen/level.tscn" id="3_f2vx8"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_dwv6n")
 
 [node name="Song Select" parent="." instance=ExtResource("1_nrhd0")]
 
+[node name="Level" parent="." instance=ExtResource("3_f2vx8")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="song_selected" from="Song Select" to="." method="_on_song_select_song_selected"]
+[connection signal="song_finished" from="Level" to="." method="_on_level_song_finished"]
