@@ -1,0 +1,90 @@
+[gd_scene load_steps=5 format=3 uid="uid://8niodux2qwbm"]
+
+[ext_resource type="Script" path="res://scenes/screen/settings.gd" id="1_go0mw"]
+[ext_resource type="FontFile" uid="uid://b407p00l3rndu" path="res://assets/PressStart2P-Regular.ttf" id="1_mycji"]
+[ext_resource type="PackedScene" uid="uid://dmyr2geq2xy8i" path="res://scenes/components/volume_control.tscn" id="2_ckiwu"]
+[ext_resource type="PackedScene" uid="uid://c4umqkumq3adi" path="res://scenes/components/playfield.tscn" id="3_qhie0"]
+
+[node name="Settings" type="CanvasLayer"]
+script = ExtResource("1_go0mw")
+
+[node name="TopSection" type="ColorRect" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 72.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Border" type="ColorRect" parent="TopSection"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -8.0
+offset_right = 640.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="TopSection"]
+layout_mode = 1
+offset_left = 15.0
+offset_right = 455.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("1_mycji")
+theme_override_font_sizes/font_size = 25
+text = "Settings"
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 384.0
+offset_bottom = 640.0
+theme_override_constants/separation = 20
+
+[node name="Volume Control" parent="VBoxContainer" instance=ExtResource("2_ckiwu")]
+layout_mode = 2
+label = "Master Volume"
+
+[node name="Volume Control2" parent="VBoxContainer" instance=ExtResource("2_ckiwu")]
+layout_mode = 2
+label = "Song Volume"
+
+[node name="Volume Control3" parent="VBoxContainer" instance=ExtResource("2_ckiwu")]
+layout_mode = 2
+label = "SFX Volume"
+
+[node name="Speed" parent="VBoxContainer" instance=ExtResource("2_ckiwu")]
+layout_mode = 2
+label = "Speed"
+max_value = 20
+
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 848.0
+offset_top = 128.0
+offset_right = 1148.0
+offset_bottom = 668.0
+
+[node name="Playfield" parent="Control" instance=ExtResource("3_qhie0")]
+layout_mode = 1
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 400.0
+offset_bottom = 720.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.75, 0.75)

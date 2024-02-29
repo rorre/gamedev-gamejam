@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://dmyr2geq2xy8i"]
+
+[ext_resource type="Script" path="res://scenes/components/volume_control.gd" id="1_ru7sg"]
+[ext_resource type="FontFile" uid="uid://b407p00l3rndu" path="res://assets/PressStart2P-Regular.ttf" id="1_vxlm8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wfx0d"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_latqu"]
+size = Vector2(0, 0)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_q3hsb"]
+size = Vector2(0, 0)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_yfajc"]
+size = Vector2(0, 0)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_f0q5o"]
+thickness = 15
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_d7uyd"]
+color = Color(1, 1, 1, 1)
+thickness = 15
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_iixft"]
+color = Color(1, 1, 1, 1)
+thickness = 15
+
+[node name="Volume Control" type="Panel"]
+custom_minimum_size = Vector2(320, 94)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -960.0
+offset_bottom = -626.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wfx0d")
+script = ExtResource("1_ru7sg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 94.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_vxlm8")
+text = "Master Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_icons/grabber = SubResource("PlaceholderTexture2D_latqu")
+theme_override_icons/grabber_highlight = SubResource("PlaceholderTexture2D_q3hsb")
+theme_override_icons/grabber_disabled = SubResource("PlaceholderTexture2D_yfajc")
+theme_override_styles/slider = SubResource("StyleBoxLine_f0q5o")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_d7uyd")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_iixft")
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]

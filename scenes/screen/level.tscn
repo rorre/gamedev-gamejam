@@ -16,6 +16,7 @@ script = ExtResource("1_x7rfd")
 layout_mode = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Song"
 
 [node name="HUD" type="Control" parent="."]
 anchors_preset = 0

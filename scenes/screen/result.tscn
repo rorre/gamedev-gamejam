@@ -276,6 +276,7 @@ offset_right = 320.0
 offset_bottom = 232.0
 
 [node name="Accuracy" type="Label" parent="AccuracyBox"]
+layout_mode = 0
 offset_top = 232.0
 offset_right = 320.0
 offset_bottom = 320.0

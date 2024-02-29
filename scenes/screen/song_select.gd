@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 
 	for box in boxes:
 		box.scale = Vector2(1, 1)
-	boxes[selected_idx].scale = Vector2(1.1, 1.1)
+	boxes[selected_idx].scale = Vector2(1.05, 1.05)
 
 	selected_difficulty = clamp(selected_difficulty, 0, len(songs[selected_idx].difficulties) - 1)
 	for box in boxes:

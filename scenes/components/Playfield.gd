@@ -1,6 +1,6 @@
 extends Control
 
-signal note_judged(judgement)
+signal note_judged(judgement: int, type: Note.NoteType)
 
 @export var current_time: int = 0
 
@@ -37,26 +37,30 @@ func find_earliest_from_col(note_queue: Array[Note], col: int) -> Note:
 	return null
 
 
-func handle_click(note: Node) -> bool:
+func handle_click(note: Note) -> bool:
 	var delta = abs(current_time - note.time)
 	if note.type == 3:
 		if delta < 100 and not note.clicked:
 			note.clicked = true
 			note.queue_free()
-			emit_signal("note_judged", 3)
+			emit_signal("note_judged", 3, note.type)
 			return true
 		return false
 
 	if delta > 250:
 		return false
-	elif delta > 200:
-		emit_signal("note_judged", 0)
+	
+	if note.type == 1:
+		return true
+	
+	if delta > 200:
+		emit_signal("note_judged", 0, note.type)
 	elif delta > 150:
-		emit_signal("note_judged", 1)
+		emit_signal("note_judged", 1, note.type)
 	elif delta > 100:
-		emit_signal("note_judged", 2)
+		emit_signal("note_judged", 2, note.type)
 	else:
-		emit_signal("note_judged", 3)
+		emit_signal("note_judged", 3, note.type)
 
 	note.clicked = true
 	if note.type == 2:
@@ -96,11 +100,19 @@ func flash_col(i: int):
 func _ready() -> void:
 	flashes = [$FlashRow1, $FlashRow2, $FlashRow3, $FlashRow4]
 
+func _reset():
+	for obj in queue:
+		obj.queue_free()
+	
+	for obj in ticks_queue:
+		obj.queue_free()
+		
+	queue = []
+	ticks_queue = []
 
 func load_chart(chart_file: Resource):
 	# Reset states
-	queue = []
-	ticks_queue = []
+	_reset()
 
 	var chart_str = FileAccess.get_file_as_string(chart_file.resource_path)
 	var chart = JSON.new()
@@ -195,7 +207,7 @@ func _handle_notes(t: float):
 			queue.remove_at(i)
 
 			if note.type == 2:
-				emit_signal("note_judged", 0)
+				emit_signal("note_judged", 0, note.type)
 			continue
 
 		if not note.visible and note.time - t < (UserSettings.ms_window + 200):
@@ -229,7 +241,7 @@ func _handle_holds(t: float):
 			if not note.clicked:
 				if is_instance_valid(note.parent):
 					note.parent.modulate.a = 0.5
-				emit_signal("note_judged", 0)
+				emit_signal("note_judged", 0, note.type)
 			continue
 		i += 1
 
@@ -240,7 +252,7 @@ func set_current_time(t):
 	_handle_holds(t)
 
 
-func _on_note_judged(judgement: int) -> void:
+func _on_note_judged(judgement: int, type: Note.NoteType) -> void:
 	var message = "Miss"
 	if judgement == 1:
 		message = "Good"
