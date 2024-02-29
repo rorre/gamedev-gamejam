@@ -29,7 +29,7 @@ var songs: Array[Song] = [
 	Song.parse_json(
 		{
 			"artist": "iyowa",
-			"title": "一千光年,",
+			"title": "一千光年",
 			"jacket": "res://songs/issen_kounen/jacket.png",
 			"audio": "res://songs/issen_kounen/audio.mp3",
 			"difficulties": [{"rating": "?", "chart": "res://songs/issen_kounen/append.json"}]
