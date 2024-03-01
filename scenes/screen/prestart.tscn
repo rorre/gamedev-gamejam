@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://s6bbsyq0gu6q"]
+
+[ext_resource type="Script" path="res://scenes/screen/prestart.gd" id="1_7l65p"]
+[ext_resource type="PackedScene" uid="uid://bubk63f8f6iu0" path="res://scenes/components/song_detail.tscn" id="1_kh7nq"]
+
+[node name="Prestart" type="Control"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7l65p")
+
+[node name="SongDetail" parent="." instance=ExtResource("1_kh7nq")]
+layout_mode = 1
+offset_top = -60.0
+offset_bottom = 60.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(150, 60)
+size_flags_horizontal = 4
+size_flags_vertical = 4

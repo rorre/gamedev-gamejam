@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://nwnyq8lslabo"]
+[gd_scene load_steps=7 format=3 uid="uid://nwnyq8lslabo"]
 
 [ext_resource type="Script" path="res://scenes/screen/result.gd" id="1_r7sav"]
 [ext_resource type="FontFile" uid="uid://b407p00l3rndu" path="res://assets/PressStart2P-Regular.ttf" id="1_uuydb"]
 [ext_resource type="Texture2D" uid="uid://cgdq33qirijsl" path="res://assets/enter.png" id="2_k4jfb"]
-[ext_resource type="Texture2D" uid="uid://b6ay5jh53wjbv" path="res://songs/issen_kounen/jacket.png" id="3_lvap0"]
-[ext_resource type="FontFile" uid="uid://7e16sc06y4ss" path="res://assets/MintsodaLimeGreen13X16Regular-4n30l.ttf" id="4_d3dfs"]
+[ext_resource type="PackedScene" uid="uid://bubk63f8f6iu0" path="res://scenes/components/song_detail.tscn" id="4_f2jme"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5rmn3"]
 bg_color = Color(0, 0, 0, 1)
@@ -80,49 +79,19 @@ offset_top = 120.0
 offset_right = 1280.0
 offset_bottom = 128.0
 
-[node name="BoxContainer" type="BoxContainer" parent="TopSection"]
-custom_minimum_size = Vector2(88, 88)
-layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 104.0
-offset_bottom = 104.0
+[node name="SongDetail" parent="TopSection" instance=ExtResource("4_f2jme")]
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 0.0
+offset_right = 289.0
+grow_horizontal = 1
 
-[node name="TextureRect" type="TextureRect" parent="TopSection/BoxContainer"]
-custom_minimum_size = Vector2(88, 88)
-layout_mode = 2
-texture = ExtResource("3_lvap0")
-expand_mode = 1
-
-[node name="Title" type="Label" parent="TopSection"]
-layout_mode = 0
-offset_left = 120.0
-offset_top = 24.0
-offset_right = 184.0
-offset_bottom = 47.0
-theme_override_fonts/font = ExtResource("4_d3dfs")
-text = "一千光年"
-vertical_alignment = 1
-
-[node name="Artist" type="Label" parent="TopSection"]
-layout_mode = 0
-offset_left = 120.0
-offset_top = 48.0
-offset_right = 173.0
-offset_bottom = 71.0
-theme_override_fonts/font = ExtResource("4_d3dfs")
-text = "iyowa"
-vertical_alignment = 1
-
-[node name="Level" type="Label" parent="TopSection"]
-layout_mode = 0
-offset_left = 120.0
-offset_top = 72.0
-offset_right = 162.0
-offset_bottom = 95.0
-theme_override_fonts/font = ExtResource("4_d3dfs")
-text = "Lv. ?"
-vertical_alignment = 1
+[node name="Control" type="Control" parent="TopSection"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="StatsBox" type="Panel" parent="."]
 layout_mode = 0

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GameJam"
+config/name="unnamed VSRG"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"

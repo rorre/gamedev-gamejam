@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/screen/level.gd" id="1_x7rfd"]
 [ext_resource type="PackedScene" uid="uid://c4umqkumq3adi" path="res://scenes/components/playfield.tscn" id="2_82881"]
 [ext_resource type="FontFile" uid="uid://b407p00l3rndu" path="res://assets/PressStart2P-Regular.ttf" id="4_qkeaq"]
-[ext_resource type="FontFile" uid="uid://7e16sc06y4ss" path="res://assets/MintsodaLimeGreen13X16Regular-4n30l.ttf" id="4_wpeie"]
+[ext_resource type="PackedScene" uid="uid://bubk63f8f6iu0" path="res://scenes/components/song_detail.tscn" id="4_t1rl7"]
 
 [node name="Level" type="Control"]
 layout_mode = 3
@@ -38,31 +38,12 @@ text = "100.00%"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
+[node name="SongDetail" parent="HUD" instance=ExtResource("4_t1rl7")]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -86.0
-offset_right = 264.0
-grow_vertical = 0
-
-[node name="Artist" type="Label" parent="HUD/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_wpeie")
-theme_override_font_sizes/font_size = 20
-text = "ああああ"
-
-[node name="Title" type="Label" parent="HUD/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "コドモチック・フィロソフィ "
-
-[node name="Level" type="Label" parent="HUD/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_wpeie")
-theme_override_font_sizes/font_size = 20
-text = "Lv. 10"
+offset_left = -640.0
+offset_top = 240.0
+offset_right = -234.5
+offset_bottom = 360.0
 
 [connection signal="note_judged" from="Playfield" to="." method="_on_playfield_note_judged"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

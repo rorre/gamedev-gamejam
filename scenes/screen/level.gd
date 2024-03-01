@@ -1,4 +1,4 @@
-extends Node
+extends Control
 class_name Level
 
 signal song_finished(song: Song, difficulty: Difficulty, grades: Array[int])
@@ -21,9 +21,8 @@ func set_playing(song: Song, difficulty: Difficulty):
 	$AudioStreamPlayer.stream = load(song.audio)
 	$Playfield.load_chart(load(difficulty.chart))
 
-	$HUD/VBoxContainer/Artist.text = song.artist
-	$HUD/VBoxContainer/Title.text = song.title
-	$HUD/VBoxContainer/Level.text = "Lv. " + difficulty.rating
+	$HUD/SongDetail.song = song
+	$HUD/SongDetail.difficulty = difficulty
 
 
 func start():

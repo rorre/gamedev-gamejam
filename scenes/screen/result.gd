@@ -9,10 +9,8 @@ class_name Result
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$TopSection/BoxContainer/TextureRect.texture = load(song.jacket)
-	$TopSection/Title.text = song.title
-	$TopSection/Artist.text = song.artist
-	$TopSection/Level.text = "Lv. " + difficulty.rating
+	$TopSection/SongDetail.song = song
+	$TopSection/SongDetail.difficulty = difficulty
 	
 	$StatsBox/PerfectCount.text = str(grades[3])
 	$StatsBox/GreatCount.text = str(grades[2])
