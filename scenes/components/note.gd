@@ -41,6 +41,7 @@ func configure_style():
 	if type == NoteType.SLIDER:
 		style.bg_color = Color.GREEN
 		style.bg_color.a = 0.25
+		modulate.a = 0.5
 	else:
 		if col < 2:
 			style.bg_color = Color("#5BCEFA")
