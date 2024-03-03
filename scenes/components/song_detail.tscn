@@ -18,11 +18,13 @@ offset_right = 150.0
 offset_bottom = 60.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_4l6ss")
 
 [node name="BoxContainer" type="BoxContainer" parent="."]
 custom_minimum_size = Vector2(88, 88)
-layout_mode = 0
+layout_mode = 2
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 104.0
@@ -35,7 +37,7 @@ texture = ExtResource("1_xbxud")
 expand_mode = 1
 
 [node name="Title" type="Label" parent="."]
-layout_mode = 0
+layout_mode = 2
 offset_left = 120.0
 offset_top = 24.0
 offset_right = 184.0
@@ -45,7 +47,7 @@ text = "一千光年"
 vertical_alignment = 1
 
 [node name="Artist" type="Label" parent="."]
-layout_mode = 0
+layout_mode = 2
 offset_left = 120.0
 offset_top = 48.0
 offset_right = 173.0
@@ -55,7 +57,7 @@ text = "iyowa"
 vertical_alignment = 1
 
 [node name="Level" type="Label" parent="."]
-layout_mode = 0
+layout_mode = 2
 offset_left = 120.0
 offset_top = 72.0
 offset_right = 162.0

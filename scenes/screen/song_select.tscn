@@ -148,6 +148,7 @@ position = Vector2(912, 40)
 texture = ExtResource("5_2ds01")
 
 [node name="SongsContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_top = 72.0
 offset_right = 1280.0
 offset_bottom = 648.0

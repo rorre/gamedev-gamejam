@@ -20,6 +20,7 @@ class_name Song
 @export var jacket: String
 @export var audio: String
 @export var difficulties: Array[Difficulty]
+@export var gimmick: Node
 
 
 static func parse_json(song: Variant) -> Song:
@@ -33,5 +34,6 @@ static func parse_json(song: Variant) -> Song:
 	for diff in song["difficulties"]:
 		diffs.append(Difficulty.parse_json(diff))
 
+	obj.gimmick = song["gimmick"]
 	obj.difficulties = diffs
 	return obj

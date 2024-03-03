@@ -83,6 +83,11 @@ func _display_result(song: Song, difficulty: Difficulty, grades: Array[int]):
 
 
 func _play_level(song: Song, diff: Difficulty) -> void:
+	current_screen.song_selected.disconnect(_play_level)
+	if state != "select":
+		return
+	
+	state = "playing"
 	var preview = prestart_scene.instantiate()
 	preview.song = song
 	preview.difficulty = diff
@@ -94,7 +99,6 @@ func _play_level(song: Song, diff: Difficulty) -> void:
 	level.song = song
 	level.difficulty = diff
 	level.song_finished.connect(_on_level_song_finished)
-	state = "playing"
 
 	await change_screen(level)
 	level.start()

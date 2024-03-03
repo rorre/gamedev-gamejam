@@ -131,7 +131,6 @@ func load_chart(chart_file: Resource):
 			generate_ticks(obj)
 
 		queue.append(obj)
-		add_child(obj)
 
 	ticks_queue.sort_custom(compare_note_time)
 	queue.sort_custom(compare_note_time)
@@ -197,6 +196,8 @@ func _handle_notes(t: float):
 		if note.time > t + UserSettings.ms_window:
 			break
 
+		if not note.is_inside_tree():
+			add_child(note)
 		# Fix for LN if head is missed, just assume clicked
 		# so the other parts of the code didnt always pick this
 		if t - note.time > 200 and note.type == 1:

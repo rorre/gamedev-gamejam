@@ -16,6 +16,10 @@ func _ready() -> void:
 func set_diff_idx(idx: int):
 	diff_idx = idx
 	$Panel/Difficulty.text = song.difficulties[diff_idx].rating
+	var panel: StyleBoxFlat = get_theme_stylebox("panel").duplicate()
+	panel.bg_color = song.difficulties[diff_idx].color
+	
+	add_theme_stylebox_override("panel", panel)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

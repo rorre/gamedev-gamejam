@@ -5,6 +5,7 @@ signal song_finished(song: Song, difficulty: Difficulty, grades: Array[int])
 
 @export var song: Song
 @export var difficulty: Difficulty
+@onready var window = get_window()
 
 # [miss, good, great, perfect]
 var grades: Array[int] = [0, 0, 0, 0]
@@ -35,6 +36,8 @@ func _process(delta):
 	time *= 1000
 
 	$Playfield.set_current_time(time)
+	if song.gimmick:
+		song.gimmick.on_time_change(window, time)
 
 
 func _on_playfield_note_judged(judgement: int, type: Note.NoteType) -> void:

@@ -1,8 +1,28 @@
 extends Control
 
 signal song_selected(song: Song, diff: Difficulty)
+const beginner = Color("#327832")
+const advanced = Color("#b47b1b")
+const expert = Color("#a12d29")
+const master = Color("#762f9f")
+const misc = Color("#1f5e84")
 
 var songs: Array[Song] = [
+	Song.parse_json(
+		{
+			"artist": "iyowa",
+			"title": "一千光年",
+			"jacket": "res://songs/issen_kounen/jacket.png",
+			"audio": "res://songs/issen_kounen/audio.mp3",
+			"difficulties": [
+				{"rating": "1", "chart": "res://songs/issen_kounen/beginner.json", "color": beginner },
+				{"rating": "5", "chart": "res://songs/issen_kounen/advanced.json", "color": advanced },
+				{"rating": "8", "chart": "res://songs/issen_kounen/expert.json", "color": expert },
+				{"rating": "?", "chart": "res://songs/issen_kounen/append.json", "color": misc }
+			],
+			"gimmick": null
+		}
+	),
 	Song.parse_json(
 		{
 			"artist": "ああああ",
@@ -11,30 +31,32 @@ var songs: Array[Song] = [
 			"audio": "res://songs/childish/audio.mp3",
 			"difficulties":
 			[
-				{"rating": "3", "chart": "res://songs/childish/beginner.json"},
-				{"rating": "7", "chart": "res://songs/childish/advanced.json"},
-				{"rating": "10", "chart": "res://songs/childish/expert.json"}
-			]
+				{"rating": "3", "chart": "res://songs/childish/beginner.json", "color": beginner },
+				{"rating": "7", "chart": "res://songs/childish/advanced.json", "color": advanced },
+				{"rating": "10", "chart": "res://songs/childish/expert.json", "color": expert }
+			],
+			"gimmick": null
 		}
 	),
 	Song.parse_json(
 		{
-			"artist": "xi",
-			"title": "FREEDOM DiVE",
-			"jacket": "res://songs/fd/jacket.png",
-			"audio": "res://songs/fd/audio.mp3",
-			"difficulties": [{"rating": "15", "chart": "res://songs/fd/master.json"}]
-		}
-	),
-	Song.parse_json(
-		{
-			"artist": "iyowa",
-			"title": "一千光年",
-			"jacket": "res://songs/issen_kounen/jacket.png",
-			"audio": "res://songs/issen_kounen/audio.mp3",
-			"difficulties": [{"rating": "?", "chart": "res://songs/issen_kounen/append.json"}]
+			"artist": "DM DOKURO",
+			"title": "Reality Check Through The Skull",
+			"jacket": "res://songs/reality_check/jacket.jpg",
+			"audio": "res://songs/reality_check/audio.mp3",
+			"difficulties": [{"rating": "12", "chart": "res://songs/reality_check/expert.json", "color": expert }],
+			"gimmick": SansGimmick.new()
 		}
 	)
+	#Song.parse_json(
+		#{
+			#"artist": "xi",
+			#"title": "FREEDOM DiVE",
+			#"jacket": "res://songs/fd/jacket.png",
+			#"audio": "res://songs/fd/audio.mp3",
+			#"difficulties": [{"rating": "15", "chart": "res://songs/fd/master.json", "color": master }]
+		#}
+	#)
 ]
 
 const song_box = preload("res://scenes/components/song_box.tscn")

@@ -2,6 +2,7 @@ from dataclasses import dataclass
 import dataclasses
 import json
 import math
+import sys
 from typing import Literal
 
 
@@ -125,5 +126,5 @@ objs = parse()
 grouped = group_by_t(objs)
 moved = move_claps_to_left(grouped)
 final = resize_objs(moved)
-with open("master.json", "w") as f:
+with open(sys.argv[1], "w") as f:
     json.dump({"objects": list(map(lambda x: dataclasses.astuple(x)[:-1], final))}, f)
