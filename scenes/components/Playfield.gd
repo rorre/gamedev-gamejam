@@ -12,7 +12,10 @@ const note = preload("res://scenes/components/note.tscn")
 const inputs = ["col_1", "col_2", "col_3", "col_4"]
 
 enum InputType { TAP, HOLD }
-
+const PERFECT_WINDOW = 33 # 2 frames
+const GREAT_WINDOW = 66 # 4 frames
+const GOOD_WINDOW = 83 # 5 frames
+const MISS_WINDOW = 100 # 6 frames
 
 
 func generate_ticks(slider: Note):
@@ -39,25 +42,25 @@ func find_earliest_from_col(note_queue: Array[Note], col: int) -> Note:
 
 func handle_click(note: Note) -> bool:
 	var delta = abs(current_time - note.time)
-	if note.type == 3:
-		if delta < 100 and not note.clicked:
+	if note.type == Note.NoteType.TICK:
+		if delta < MISS_WINDOW and not note.clicked:
 			note.clicked = true
 			note.queue_free()
 			emit_signal("note_judged", 3, note.type)
 			return true
 		return false
 
-	if delta > 250:
+	if delta > MISS_WINDOW + 33: # + 1 frame
 		return false
 	
-	if note.type == 1:
+	if note.type == Note.NoteType.SLIDER:
 		return true
 	
-	if delta > 200:
+	if delta > MISS_WINDOW:
 		emit_signal("note_judged", 0, note.type)
-	elif delta > 150:
+	elif delta > GOOD_WINDOW:
 		emit_signal("note_judged", 1, note.type)
-	elif delta > 100:
+	elif delta > GREAT_WINDOW:
 		emit_signal("note_judged", 2, note.type)
 	else:
 		emit_signal("note_judged", 3, note.type)
@@ -200,10 +203,10 @@ func _handle_notes(t: float):
 			add_child(note)
 		# Fix for LN if head is missed, just assume clicked
 		# so the other parts of the code didnt always pick this
-		if t - note.time > 200 and note.type == 1:
+		if t - note.time > MISS_WINDOW and note.type == 1:
 			note.clicked = true
 
-		if t - note.time > 200 and t - note.end_time > 200:
+		if t - note.time > MISS_WINDOW and t - note.end_time > 200:
 			note.queue_free()
 			queue.remove_at(i)
 
@@ -234,8 +237,7 @@ func _handle_holds(t: float):
 		if note.time > t + UserSettings.ms_window:
 			break
 
-		# 100ms buffer :>
-		if t > note.time + 100:
+		if t > note.time + GOOD_WINDOW:
 			note.queue_free()
 			ticks_queue.remove_at(i)
 
