@@ -44,7 +44,11 @@ var songs: Array[Song] = [
 			"title": "Reality Check Through The Skull",
 			"jacket": "res://songs/reality_check/jacket.jpg",
 			"audio": "res://songs/reality_check/audio.mp3",
-			"difficulties": [{"rating": "12", "chart": "res://songs/reality_check/expert.json", "color": expert }],
+			"difficulties": [
+				{"rating": "4", "chart": "res://songs/reality_check/beginner.json", "color": beginner },
+				{"rating": "9", "chart": "res://songs/reality_check/advanced.json", "color": advanced },
+				{"rating": "12", "chart": "res://songs/reality_check/expert.json", "color": expert }
+			],
 			"gimmick": SansGimmick.new()
 		}
 	)

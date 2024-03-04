@@ -31,6 +31,11 @@ func start():
 
 
 func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		$AudioStreamPlayer.stop()
+		_on_audio_stream_player_finished()
+		return
+
 	var time = $AudioStreamPlayer.get_playback_position() + AudioServer.get_time_since_last_mix()
 	time -= AudioServer.get_output_latency()
 	time *= 1000
