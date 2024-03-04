@@ -14,7 +14,7 @@ enum NoteType { SLIDER = 1, NOTE = 2, TICK = 3 }
 
 var slider_added = false
 const WIDTH = 100
-const HEIGHT = 10
+const HEIGHT = 15
 
 
 func update_note_size() -> Vector2:
@@ -25,7 +25,7 @@ func update_note_size() -> Vector2:
 		var new_height = px_per_ms * (end_time - time)
 		size = Vector2(x_size, new_height)
 	else:
-		var new_height = 10
+		var new_height = HEIGHT
 		size = Vector2(x_size, new_height)
 	set_size(size)
 	return size
@@ -40,7 +40,7 @@ func configure_style():
 
 	if type == NoteType.SLIDER:
 		style.bg_color = Color.GREEN
-		style.bg_color.a = 0.25
+		style.bg_color.a = 0.5
 		modulate.a = 0.5
 	else:
 		if col < 2:
