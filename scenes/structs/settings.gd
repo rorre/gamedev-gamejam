@@ -9,10 +9,10 @@ signal sfx_volume_change(value: int)
 @onready var sfx_bus_idx = AudioServer.get_bus_index("SFX")
 @onready var song_bus_idx = AudioServer.get_bus_index("Song")
 
-@export var speed: int = 5:
+@export var speed: int = 1:
 	set(new_speed):
 		speed = new_speed
-		ms_window = 50 * (20 - speed)
+		ms_window = 50 * (20 - (speed - 1))
 		speed_change.emit(new_speed)
 @export var master_volume: int = 50:
 	set(value):
