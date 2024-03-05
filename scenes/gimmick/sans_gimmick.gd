@@ -93,8 +93,9 @@ func _init():
 	for i in range(47700, 61546, ONE_BEAT_MS):
 		gimmicks.append_array(generate_shake(i))
 
-	gimmicks.append(ChangeSpeed.new(62469, 0.5, ONE_BEAT_MS * 4 / 1000))	
+	gimmicks.append(ChangeSpeed.new(62469, 0.5, ONE_BEAT_MS * 4 / 1000))
 	gimmicks.append_array(generate_breathe(62469, 102162))
+	gimmicks.append(ChangeSpeed.new(104941, 1, ONE_BEAT_MS * 4 / 1000))
 	gimmicks.append(MoveWindow.new(104941, 0.5, 0.55, ONE_BEAT_MS / 4 / 1000))
 	gimmicks.append(MoveWindow.new(105277, 0.45, 0.5, ONE_BEAT_MS / 4 / 1000))
 	gimmicks.append(MoveWindow.new(105623, 0.5, 0.45, ONE_BEAT_MS / 4 / 1000))
@@ -120,7 +121,7 @@ func _init():
 	gimmicks.append(MoveWindow.new(128008, 0.55, 0.45, ONE_BEAT_MS / 2 / 1000))
 	gimmicks.append(MoveWindow.new(128469, 0.5, 0.5, ONE_BEAT_MS / 2 / 1000))
 	
-	gimmicks.append(MoveWindow.new(128931, 0.5, 0.45, ONE_BEAT_MS * 5 / 1000))
+	gimmicks.append(MoveWindow.new(128931, 0.5, 0.45, ONE_BEAT_MS * 8 / 1000))
 	
 	gimmicks.append(MoveWindow.new(135392, 0.45, 0.5, ONE_BEAT_MS / 2 / 1000))
 	gimmicks.append(MoveWindow.new(135392 + ONE_BEAT_MS, 0.5, 0.45, ONE_BEAT_MS / 2 / 1000))
@@ -144,7 +145,10 @@ func _init():
 	gimmicks.append(ChangeSpeed.new(166777, 0.25, ONE_BEAT_MS * 15 * 4 / 1000))	
 
 func cleanup(window: Window):
+	ScaleWindow.new(0, 1, 1, ONE_BEAT_MS / 2 / 1000).run(window)
 	MoveWindow.new(181546, 0.5, 0.5, ONE_BEAT_MS / 2 / 1000).run(window)
+	ChangeSpeed.new(104941, 1, ONE_BEAT_MS * 4 / 1000).run(window)
+	
 
 func on_time_change(window: Window, t: int):
 	if not gimmicks:

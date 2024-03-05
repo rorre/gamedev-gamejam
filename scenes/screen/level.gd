@@ -44,6 +44,8 @@ func _process(delta):
 		return
 	
 	if Input.is_action_just_pressed("restart"):
+		if song.gimmick:
+			song.gimmick.cleanup(window)
 		restart()
 		return
 
