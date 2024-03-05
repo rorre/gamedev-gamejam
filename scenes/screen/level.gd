@@ -30,10 +30,21 @@ func start():
 	$AudioStreamPlayer.play()
 
 
+func restart():
+	$AudioStreamPlayer.seek(0)
+	grades = [0, 0, 0, 0]
+	$HUD/Accuracy.text = "100.00%"
+	$Playfield.load_chart(load(difficulty.chart))
+	
+
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		$AudioStreamPlayer.stop()
 		_on_audio_stream_player_finished()
+		return
+	
+	if Input.is_action_just_pressed("restart"):
+		restart()
 		return
 
 	var time = $AudioStreamPlayer.get_playback_position() + AudioServer.get_time_since_last_mix()
@@ -69,4 +80,6 @@ func _on_playfield_note_judged(judgement: int, type: Note.NoteType) -> void:
 	sfx_player.queue_free()
 
 func _on_audio_stream_player_finished():
+	if song.gimmick:
+		song.gimmick.cleanup(window)
 	song_finished.emit(song, difficulty, grades)
