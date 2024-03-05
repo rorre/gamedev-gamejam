@@ -71,7 +71,7 @@ func _display_splash():
 func _display_song_select():
 	var song_select = song_select_scene.instantiate()
 	song_select.song_selected.connect(_play_level)
-	change_screen(song_select)
+	await change_screen(song_select)
 	
 	state = "select"
 
@@ -81,7 +81,7 @@ func _display_result(song: Song, difficulty: Difficulty, grades: Array[int]):
 	result.song = song
 	result.difficulty = difficulty
 	result.grades = grades
-	change_screen(result)
+	await change_screen(result)
 	
 	state = "result"
 
@@ -108,8 +108,8 @@ func _play_level(song: Song, diff: Difficulty) -> void:
 	level.start()
 
 func _display_settings():
+	await change_screen(settings_scene.instantiate())
 	state = "settings"
-	change_screen(settings_scene.instantiate())
 
 func _on_level_song_finished(song: Song, difficulty: Difficulty, grades: Array[int]):
 	_display_result(song, difficulty, grades)
