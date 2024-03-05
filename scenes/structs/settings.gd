@@ -9,11 +9,15 @@ signal sfx_volume_change(value: int)
 @onready var sfx_bus_idx = AudioServer.get_bus_index("SFX")
 @onready var song_bus_idx = AudioServer.get_bus_index("Song")
 
+@export var effective_speed: float = 1.0:
+	set(new_speed):
+		effective_speed = new_speed
+		ms_window = 50.0 * (20.0 - (new_speed - 1.0))
+		speed_change.emit(new_speed)
 @export var speed: int = 1:
 	set(new_speed):
 		speed = new_speed
-		ms_window = 50 * (20 - (speed - 1))
-		speed_change.emit(new_speed)
+		effective_speed = new_speed
 @export var master_volume: int = 50:
 	set(value):
 		master_volume_change.emit(value)
@@ -37,11 +41,5 @@ func _ready() -> void:
 	master_volume = 50
 	song_volume = 50
 	sfx_volume = 50
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("speed_up"):
-		speed = min(speed + 1, 20)
-	elif Input.is_action_just_pressed("speed_down"):
-		speed = max(speed - 1, 0)
+	speed = 1
 

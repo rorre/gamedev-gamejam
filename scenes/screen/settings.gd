@@ -1,7 +1,7 @@
 extends Control
 
 @onready var playfield = $Control/Playfield
-
+@onready var settings = get_node("/root/UserSettings")
 const chart = preload("res://songs/settings_chart.json")
 var t: int = 0
 
@@ -16,15 +16,15 @@ var selected = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	playfield.load_chart(chart)
-	$VBoxContainer/Speed.value = UserSettings.speed
-	$"VBoxContainer/Volume Control".value = UserSettings.master_volume
-	$"VBoxContainer/Volume Control2".value = UserSettings.song_volume
-	$"VBoxContainer/Volume Control3".value = UserSettings.sfx_volume
+	$VBoxContainer/Speed.value = settings.speed
+	$"VBoxContainer/Volume Control".value = settings.master_volume
+	$"VBoxContainer/Volume Control2".value = settings.song_volume
+	$"VBoxContainer/Volume Control3".value = settings.sfx_volume
 	
-	$VBoxContainer/Speed.changed.connect(func n(value): UserSettings.speed = value)
-	$"VBoxContainer/Volume Control".changed.connect(func n(value): UserSettings.master_volume = value)
-	$"VBoxContainer/Volume Control2".changed.connect(func n(value): UserSettings.song_volume = value)
-	$"VBoxContainer/Volume Control3".changed.connect(func n(value): UserSettings.sfx_volume = value)
+	$VBoxContainer/Speed.changed.connect(func n(value): settings.speed = value)
+	$"VBoxContainer/Volume Control".changed.connect(func n(value): settings.master_volume = value)
+	$"VBoxContainer/Volume Control2".changed.connect(func n(value): settings.song_volume = value)
+	$"VBoxContainer/Volume Control3".changed.connect(func n(value): settings.sfx_volume = value)
 
 func process_box():
 	for box in boxes:

@@ -3,7 +3,7 @@ extends Control
 signal note_judged(judgement: int, type: Note.NoteType)
 
 @export var current_time: int = 0
-
+@onready var settings = get_node("/root/UserSettings")
 
 var flashes: Array[ColorRect]
 var queue: Array[Note] = []
@@ -103,7 +103,7 @@ func flash_col(i: int):
 func _ready() -> void:
 	flashes = [$FlashRow1, $FlashRow2, $FlashRow3, $FlashRow4]
 
-func _reset():
+func reset():
 	for obj in queue:
 		obj.queue_free()
 	
@@ -115,7 +115,7 @@ func _reset():
 
 func load_chart(chart_file: Resource):
 	# Reset states
-	_reset()
+	reset()
 
 	var chart_str = FileAccess.get_file_as_string(chart_file.resource_path)
 	var chart = JSON.new()
@@ -196,7 +196,7 @@ func _handle_notes(t: float):
 			queue.remove_at(i)
 			continue
 
-		if note.time > t + UserSettings.ms_window:
+		if note.time > t + settings.ms_window:
 			break
 
 		if not note.is_inside_tree():
@@ -214,12 +214,12 @@ func _handle_notes(t: float):
 				emit_signal("note_judged", 0, note.type)
 			continue
 
-		if not note.visible and note.time - t < (UserSettings.ms_window + 200):
+		if not note.visible and note.time - t < (settings.ms_window + 200):
 			note.visible = true
 
 		var orig: Vector2 = note.position
 		var orig_size: Vector2 = note.size
-		note.position = Vector2(orig.x, 605 * (1.0 - (note.time - t) / UserSettings.ms_window) - orig_size.y)
+		note.position = Vector2(orig.x, 605 * (1.0 - (note.time - t) / settings.ms_window) - orig_size.y)
 		i += 1
 
 
@@ -234,7 +234,7 @@ func _handle_holds(t: float):
 			ticks_queue.remove_at(i)
 			continue
 
-		if note.time > t + UserSettings.ms_window:
+		if note.time > t + settings.ms_window:
 			break
 
 		if t > note.time + GOOD_WINDOW:

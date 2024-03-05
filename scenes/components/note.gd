@@ -12,6 +12,8 @@ enum NoteType { SLIDER = 1, NOTE = 2, TICK = 3 }
 @export var parent: Note
 @export var margin: int = 2
 
+var settings: UserSettings
+
 var slider_added = false
 const WIDTH = 100
 const HEIGHT = 15
@@ -19,7 +21,7 @@ const HEIGHT = 15
 
 func update_note_size() -> Vector2:
 	var x_size = colsize * WIDTH - margin
-	var px_per_ms = 605.0 / UserSettings.ms_window
+	var px_per_ms = 605.0 / settings.ms_window
 	var size: Vector2
 	if type == NoteType.SLIDER:
 		var new_height = px_per_ms * (end_time - time)
@@ -59,12 +61,13 @@ func configure_style():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	settings = get_node("/root/UserSettings")
 	var new_size = update_note_size()
 	set_position(Vector2(100 * col, -new_size.y))
 	configure_style()
 	hide()
 	
-	UserSettings.speed_change.connect(func (_speed): return update_note_size())
+	settings.speed_change.connect(func (_speed): return update_note_size())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -79,7 +82,6 @@ func set_type(t: String):
 		type = NoteType.TICK
 	else:
 		type = NoteType.SLIDER
-		update_note_size()
 
 
 func is_valid_click(clickCol: int):
