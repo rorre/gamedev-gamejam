@@ -90,7 +90,7 @@ func _play_level(song: Song, diff: Difficulty) -> void:
 	current_screen.song_selected.disconnect(_play_level)
 	if state != "select":
 		return
-	
+
 	state = "playing"
 	var preview = prestart_scene.instantiate()
 	preview.song = song
