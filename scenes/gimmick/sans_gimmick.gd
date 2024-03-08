@@ -58,16 +58,28 @@ func generate_shake(t: int):
 	return commands
 
 func generate_breathe(start_t: int, end_t: int):
-	var commands: Array[ScaleWindow] = []
+	var commands: Array[MoveWindow] = []
 	
 	while start_t < end_t:
-		commands.append(ScaleWindow.new(start_t, 0.95, 0.95, ONE_BEAT_MS * 8 / 1000))
+		commands.append(MoveWindow.new(start_t, 0.5, 0.45, ONE_BEAT_MS * 8 / 1000))
 		start_t += ONE_BEAT_MS * 8
 		if start_t >= end_t:
 			break
-		commands.append(ScaleWindow.new(start_t, 1, 1, ONE_BEAT_MS * 8 / 1000))
+		
+		commands.append(MoveWindow.new(start_t, 0.5, 0.5, ONE_BEAT_MS * 8 / 1000))
 		start_t += ONE_BEAT_MS * 8
-	
+		if start_t >= end_t:
+			break
+
+		commands.append(MoveWindow.new(start_t, 0.5, 0.55, ONE_BEAT_MS * 8 / 1000))
+		start_t += ONE_BEAT_MS * 8
+		if start_t >= end_t:
+			break
+
+		commands.append(MoveWindow.new(start_t, 0.5, 0.5, ONE_BEAT_MS * 8 / 1000))
+		start_t += ONE_BEAT_MS * 8
+		if start_t >= end_t:
+			break
 	return commands
 
 var gimmicks: Array[Command]
@@ -76,7 +88,6 @@ func _init():
 	rng.seed = randi()
 	
 	gimmicks = [
-		ScaleWindow.new(0, 0.75, 0.75, ONE_BEAT_MS / 2 / 1000),
 		MoveWindow.new(ONE_BEAT_MS, 0.4, 0.5, ONE_BEAT_MS / 2 / 1000)
 	]
 	gimmicks.append(ChangeSpeed.new(3411, 0.5, ONE_BEAT_MS * 4 * 4 / 1000))
@@ -84,8 +95,9 @@ func _init():
 	gimmicks.append_array(move_wave(5257, 1, 0, 1846, true, 0.25))
 	gimmicks.append_array(move_wave(7103, 0, 1, 1846, false, 0.25))
 	gimmicks.append_array(move_wave(8949, 1, 0.5, 1800, true, 0.25))
-	gimmicks.append(ScaleWindow.new(10795, 1, 1, 5.521))
-	gimmicks.append(ChangeSpeed.new(3411, 1.0, ONE_BEAT_MS * 4 * 4 / 1000))	
+	gimmicks.append(MoveWindow.new(10795, 0.5, 0.4, 5.521 / 2))
+	gimmicks.append(ChangeSpeed.new(10795, 1.0, ONE_BEAT_MS * 4 * 4 / 1000))
+	gimmicks.append(MoveWindow.new(13556, 0.5, 0.5, 5.521 / 2))
 	
 	for i in range(18392, 47700, ONE_BEAT_MS * 2):
 		gimmicks.append_array(generate_shake(i))
@@ -141,13 +153,12 @@ func _init():
 	for i in range(163085, 166777, ONE_BEAT_MS):
 		gimmicks.append_array(generate_shake(i))
 	
-	gimmicks.append(MoveWindow.new(166777, 0.5, 1.25, ONE_BEAT_MS * 15 * 4 / 1000))
-	gimmicks.append(ChangeSpeed.new(166777, 0.25, ONE_BEAT_MS * 15 * 4 / 1000))	
+	gimmicks.append(MoveWindow.new(166777, 0.5, 1.25, ONE_BEAT_MS * 14 * 4 / 1000))
+	gimmicks.append(ChangeSpeed.new(166777, 0.25, ONE_BEAT_MS * 14 * 4 / 1000))	
 
 func cleanup(window: Window):
-	ScaleWindow.new(0, 1, 1, ONE_BEAT_MS / 2 / 1000).run(window)
-	MoveWindow.new(181546, 0.5, 0.5, ONE_BEAT_MS / 2 / 1000).run(window)
-	ChangeSpeed.new(104941, 1, ONE_BEAT_MS * 4 / 1000).run(window)
+	await MoveWindow.new(181546, 0.5, 0.5, ONE_BEAT_MS / 2 / 1000).run(window)
+	ChangeSpeed.new(104941, 1, ONE_BEAT_MS / 2 / 1000).run(window)
 	
 
 func on_time_change(window: Window, t: int):

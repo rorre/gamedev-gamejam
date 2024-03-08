@@ -10,7 +10,7 @@ func _init(t: int, speed_multiplier: float, length: float):
 	speed_change = speed_multiplier
 	duration = length
 
-func run(window: Window):
+func run(window: Window) -> Tween:
 	if not settings:
 		settings = window.get_node("/root/UserSettings")
 		
@@ -22,3 +22,5 @@ func run(window: Window):
 		duration
 	)
 	tween.play()
+
+	return tween

@@ -4,7 +4,7 @@ class_name ScaleWindow
 const default_w = 1280
 const default_h = 720
 
-func run(window: Window):
+func run(window: Window) -> Tween:
 	var tween = window.create_tween().set_parallel(true)
 	
 	var new_x = (default_w * x)
@@ -17,6 +17,8 @@ func run(window: Window):
 	tween.tween_property(window, "size", Vector2i(new_x, new_y), duration)
 	tween.tween_method(recenter_window.bind(window, orig_center), 0, 1, duration)
 	tween.play()
+	
+	return tween
 
 func recenter_window(_dontcare: int, window: Window, center: Vector2i):
 	var x = center.x - (window.size.x / 2)
