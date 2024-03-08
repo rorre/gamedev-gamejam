@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://8niodux2qwbm"]
+[gd_scene load_steps=6 format=3 uid="uid://8niodux2qwbm"]
 
 [ext_resource type="Script" path="res://scenes/screen/settings.gd" id="1_go0mw"]
 [ext_resource type="FontFile" uid="uid://b407p00l3rndu" path="res://assets/PressStart2P-Regular.ttf" id="1_mycji"]
 [ext_resource type="PackedScene" uid="uid://dmyr2geq2xy8i" path="res://scenes/components/volume_control.tscn" id="2_ckiwu"]
 [ext_resource type="PackedScene" uid="uid://c4umqkumq3adi" path="res://scenes/components/playfield.tscn" id="3_qhie0"]
+[ext_resource type="Texture2D" uid="uid://dr5ag6jw3cyac" path="res://assets/esc.png" id="5_k1uyh"]
 
 [node name="Settings" type="Control"]
 custom_minimum_size = Vector2(1280, 720)
@@ -72,12 +73,14 @@ max_value = 20
 
 [node name="Control" type="Control" parent="."]
 clip_contents = true
-layout_mode = 3
-anchors_preset = 0
-offset_left = 848.0
-offset_top = 128.0
-offset_right = 1148.0
-offset_bottom = 668.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -528.0
+offset_right = -128.0
+offset_bottom = 720.0
+grow_horizontal = 0
 
 [node name="Playfield" parent="Control" instance=ExtResource("3_qhie0")]
 layout_mode = 1
@@ -92,4 +95,53 @@ offset_right = 400.0
 offset_bottom = 720.0
 grow_horizontal = 1
 grow_vertical = 1
-scale = Vector2(0.75, 0.75)
+
+[node name="BottomSection" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -72.0
+offset_right = 640.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Border" type="ColorRect" parent="BottomSection"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 8.0
+grow_horizontal = 2
+
+[node name="Exit" type="Label" parent="BottomSection"]
+layout_mode = 2
+offset_left = 55.0
+offset_top = 24.0
+offset_right = 159.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("1_mycji")
+theme_override_font_sizes/font_size = 20
+text = "Exit
+"
+vertical_alignment = 1
+
+[node name="Esc" type="Sprite2D" parent="BottomSection"]
+position = Vector2(31, 40)
+texture = ExtResource("5_k1uyh")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 852.0
+offset_top = 128.0
+offset_right = 1062.0
+offset_bottom = 158.0
+theme_override_fonts/font = ExtResource("1_mycji")
+theme_override_font_sizes/font_size = 30
+text = "Preview"
