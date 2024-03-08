@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="unnamed VSRG"
+config/version="0.1.2"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://logo.png"
 
 [autoload]
 
