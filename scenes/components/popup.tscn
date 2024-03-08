@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://5j7qw2a7qr6o"]
+
+[ext_resource type="Script" path="res://scenes/components/popup.gd" id="1_re8qy"]
+[ext_resource type="FontFile" uid="uid://b407p00l3rndu" path="res://assets/PressStart2P-Regular.ttf" id="1_tn38m"]
+[ext_resource type="Texture2D" uid="uid://dr5ag6jw3cyac" path="res://assets/esc.png" id="2_r1m1e"]
+[ext_resource type="Texture2D" uid="uid://cgdq33qirijsl" path="res://assets/enter.png" id="3_kww3i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cf446"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="InputEventKey" id="InputEventKey_e3lrk"]
+physical_keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_coesa"]
+events = [SubResource("InputEventKey_e3lrk")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_c83nn"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_xkeeh"]
+events = [SubResource("InputEventKey_c83nn")]
+
+[node name="Popup" type="CanvasLayer"]
+script = ExtResource("1_re8qy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.247059)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cf446")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel"]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 200.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("1_tn38m")
+text = "This is a text to be used for popup content"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="No" type="Button" parent="CenterContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_tn38m")
+shortcut = SubResource("Shortcut_coesa")
+text = "No
+"
+icon = ExtResource("2_r1m1e")
+
+[node name="Yes" type="Button" parent="CenterContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_tn38m")
+shortcut = SubResource("Shortcut_xkeeh")
+text = "Yes"
+icon = ExtResource("3_kww3i")
+
+[connection signal="pressed" from="CenterContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/No" to="." method="_on_no_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/Yes" to="." method="_on_yes_pressed"]

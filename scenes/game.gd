@@ -6,7 +6,9 @@ const result_scene = preload("res://scenes/screen/result.tscn")
 const settings_scene = preload("res://scenes/screen/settings.tscn")
 const prestart_scene = preload("res://scenes/screen/prestart.tscn")
 const splash_scene = preload("res://scenes/screen/splash.tscn")
+const popup = preload("res://scenes/components/popup.tscn")
 
+var exit_popup: CanvasLayer
 var current_screen: Control
 var state = "splash"
 var in_transition = false
@@ -32,8 +34,25 @@ func change_screen(new_screen: Node):
 	
 	current_screen = new_screen
 
+func _close_popup():
+	exit_popup.queue_free()
+	# I need this timeout so that the game doesn't reopen the popup
+	await get_tree().create_timer(0.1).timeout
+	get_tree().paused = false
+	exit_popup = null
+
+func _display_exit_popup():
+	exit_popup = popup.instantiate()
+	exit_popup.text = "Are you sure you want to exit?"
+	exit_popup.accepted.connect(func (): get_tree().quit())
+	exit_popup.rejected.connect(_close_popup)
+	add_child(exit_popup)
+	get_tree().paused = true
+	
 
 func _process(delta: float) -> void:
+	if state == "select" and Input.is_action_just_pressed("ui_cancel") and not exit_popup:
+		_display_exit_popup()
 	if state == "select" and Input.is_action_just_pressed("settings"):
 		_display_settings()
 	if state == "result" and Input.is_action_just_pressed("ui_accept"):
