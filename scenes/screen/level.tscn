@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bubk63f8f6iu0" path="res://scenes/components/song_detail.tscn" id="4_t1rl7"]
 
 [node name="Level" type="Control"]
+clip_contents = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1280.0
