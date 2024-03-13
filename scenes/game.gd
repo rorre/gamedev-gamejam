@@ -60,20 +60,22 @@ func _process(delta: float) -> void:
 	if state == "settings" and Input.is_action_just_pressed("ui_cancel"):
 		_display_song_select()
 	if state == "splash" and Input.is_action_just_pressed("ui_accept") and not in_transition:
+		in_transition = true
 		var song_select = song_select_scene.instantiate()
 		song_select.modulate.a = 0
-		
+
 		add_child(song_select)
 		var tween = get_tree().create_tween().set_parallel(true)
 		tween.tween_property(current_screen, "modulate:a", 0, 0.5)
 		tween.tween_property(song_select, "modulate:a", 1, 0.5)
 		tween.play()
 		await tween.finished
-		
+
 		current_screen.queue_free()
 		current_screen = song_select
 		song_select.song_selected.connect(_play_level)
 		state = "select"
+		in_transition = false
 
 func _ready() -> void:
 	_display_splash()
@@ -83,9 +85,12 @@ func _display_splash():
 	current_screen = splash_scene.instantiate()
 	current_screen.modulate.a = 0
 	add_child(current_screen)
+
 	var tween = get_tree().create_tween()
 	tween.tween_property(current_screen, "modulate:a", 1, 1)
 	tween.play()
+	await tween.finished
+
 
 func _display_song_select():
 	var song_select = song_select_scene.instantiate()
@@ -106,6 +111,8 @@ func _display_result(song: Song, difficulty: Difficulty, grades: Array[int]):
 
 
 func _play_level(song: Song, diff: Difficulty) -> void:
+	if in_transition:
+		return
 	current_screen.song_selected.disconnect(_play_level)
 	if state != "select":
 		return
