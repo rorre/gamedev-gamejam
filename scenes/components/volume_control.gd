@@ -10,6 +10,7 @@ signal changed(value: int)
 		slider.value = new_value
 		changed.emit(value)
 @export var max_value: int = 100
+@export var min_value: int = 0
 @onready var slider = $MarginContainer/VBoxContainer/HSlider
 @export var enabled: bool = false:
 	set(value):
@@ -21,6 +22,7 @@ func _ready() -> void:
 	$MarginContainer/VBoxContainer/Label.text = label
 	slider.value = value
 	slider.max_value = max_value
+	slider.min_value = min_value
 
 var ttl = 0.05
 func _process(delta: float) -> void:

@@ -70,6 +70,7 @@ label = "SFX Volume"
 layout_mode = 2
 label = "Speed"
 max_value = 20
+min_value = 1
 
 [node name="Control" type="Control" parent="."]
 clip_contents = true
