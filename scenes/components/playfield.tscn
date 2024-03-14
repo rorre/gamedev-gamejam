@@ -18,6 +18,62 @@ grow_vertical = 2
 color = Color(0.211765, 0.211765, 0.211765, 1)
 script = ExtResource("1_t8kkp")
 
+[node name="Control" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.490196)
+anchors_preset = 0
+offset_top = 610.0
+offset_right = 400.0
+offset_bottom = 720.0
+
+[node name="Label" type="Label" parent="Control"]
+z_index = 31
+layout_mode = 1
+offset_right = 100.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("2_u5hcf")
+theme_override_font_sizes/font_size = 25
+text = "D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control"]
+z_index = 31
+layout_mode = 1
+offset_left = 100.0
+offset_right = 200.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("2_u5hcf")
+theme_override_font_sizes/font_size = 25
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control"]
+z_index = 31
+layout_mode = 1
+offset_left = 200.0
+offset_right = 300.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("2_u5hcf")
+theme_override_font_sizes/font_size = 25
+text = "J
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control"]
+z_index = 31
+layout_mode = 1
+offset_left = 300.0
+offset_right = 400.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("2_u5hcf")
+theme_override_font_sizes/font_size = 25
+text = "K
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="BottomBar" type="ColorRect" parent="."]
 z_index = 30
 layout_mode = 1
@@ -32,92 +88,6 @@ offset_right = 200.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.211765, 0.211765, 0.211765, 1)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="Judgement1" type="ColorRect" parent="."]
-z_index = 30
-layout_mode = 0
-offset_top = 600.0
-offset_right = 100.0
-offset_bottom = 610.0
-color = Color(0.356863, 0.807843, 0.980392, 1)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="Judgement2" type="ColorRect" parent="."]
-z_index = 30
-layout_mode = 0
-offset_left = 100.0
-offset_top = 600.0
-offset_right = 200.0
-offset_bottom = 610.0
-color = Color(0.356863, 0.807843, 0.980392, 1)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="Judgement3" type="ColorRect" parent="."]
-z_index = 30
-layout_mode = 0
-offset_left = 200.0
-offset_top = 600.0
-offset_right = 300.0
-offset_bottom = 610.0
-color = Color(0.960784, 0.662745, 0.721569, 1)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="Judgement4" type="ColorRect" parent="."]
-z_index = 30
-layout_mode = 0
-offset_left = 300.0
-offset_top = 600.0
-offset_right = 400.0
-offset_bottom = 610.0
-color = Color(0.960784, 0.662745, 0.721569, 1)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="FlashRow1" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
-z_index = 30
-layout_mode = 0
-offset_right = 100.0
-offset_bottom = 600.0
-color = Color(0.356863, 0.807843, 0.980392, 1)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="FlashRow2" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
-z_index = 30
-layout_mode = 0
-offset_left = 100.0
-offset_right = 200.0
-offset_bottom = 600.0
-color = Color(0.356863, 0.807843, 0.980392, 1)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="FlashRow3" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
-z_index = 30
-layout_mode = 0
-offset_left = 200.0
-offset_right = 300.0
-offset_bottom = 600.0
-color = Color(0.960784, 0.662745, 0.721569, 1)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="FlashRow4" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
-z_index = 30
-layout_mode = 0
-offset_left = 300.0
-offset_right = 400.0
-offset_bottom = 600.0
-color = Color(0.960784, 0.662745, 0.721569, 1)
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -138,5 +108,89 @@ theme_override_fonts/font = ExtResource("2_u5hcf")
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="JudgementBar" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Judgement1" type="ColorRect" parent="JudgementBar"]
+z_index = 30
+layout_mode = 0
+offset_top = 600.0
+offset_right = 100.0
+offset_bottom = 610.0
+color = Color(0.356863, 0.807843, 0.980392, 1)
+
+[node name="Judgement2" type="ColorRect" parent="JudgementBar"]
+z_index = 30
+layout_mode = 0
+offset_left = 100.0
+offset_top = 600.0
+offset_right = 200.0
+offset_bottom = 610.0
+color = Color(0.356863, 0.807843, 0.980392, 1)
+
+[node name="Judgement3" type="ColorRect" parent="JudgementBar"]
+z_index = 30
+layout_mode = 0
+offset_left = 200.0
+offset_top = 600.0
+offset_right = 300.0
+offset_bottom = 610.0
+color = Color(0.960784, 0.662745, 0.721569, 1)
+
+[node name="Judgement4" type="ColorRect" parent="JudgementBar"]
+z_index = 30
+layout_mode = 0
+offset_left = 300.0
+offset_top = 600.0
+offset_right = 400.0
+offset_bottom = 610.0
+color = Color(0.960784, 0.662745, 0.721569, 1)
+
+[node name="Flashes" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="FlashRow1" type="ColorRect" parent="Flashes"]
+modulate = Color(1, 1, 1, 0)
+z_index = 30
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 600.0
+color = Color(0.356863, 0.807843, 0.980392, 1)
+
+[node name="FlashRow2" type="ColorRect" parent="Flashes"]
+modulate = Color(1, 1, 1, 0)
+z_index = 30
+layout_mode = 0
+offset_left = 100.0
+offset_right = 200.0
+offset_bottom = 600.0
+color = Color(0.356863, 0.807843, 0.980392, 1)
+
+[node name="FlashRow3" type="ColorRect" parent="Flashes"]
+modulate = Color(1, 1, 1, 0)
+z_index = 30
+layout_mode = 0
+offset_left = 200.0
+offset_right = 300.0
+offset_bottom = 600.0
+color = Color(0.960784, 0.662745, 0.721569, 1)
+
+[node name="FlashRow4" type="ColorRect" parent="Flashes"]
+modulate = Color(1, 1, 1, 0)
+z_index = 30
+layout_mode = 0
+offset_left = 300.0
+offset_right = 400.0
+offset_bottom = 600.0
+color = Color(0.960784, 0.662745, 0.721569, 1)
 
 [connection signal="note_judged" from="." to="." method="_on_note_judged"]

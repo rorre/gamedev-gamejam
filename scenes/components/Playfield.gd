@@ -101,7 +101,10 @@ func flash_col(i: int):
 
 
 func _ready() -> void:
-	flashes = [$FlashRow1, $FlashRow2, $FlashRow3, $FlashRow4]
+	flashes = [$Flashes/FlashRow1, $Flashes/FlashRow2, $Flashes/FlashRow3, $Flashes/FlashRow4]
+	await get_tree().create_timer(2).timeout
+	var tween = create_tween()
+	tween.tween_property($Guide, "modulate:a", 0, 1)
 
 func reset():
 	for obj in queue:
