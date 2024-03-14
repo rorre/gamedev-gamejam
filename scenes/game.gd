@@ -100,11 +100,12 @@ func _display_song_select():
 	state = "select"
 
 
-func _display_result(song: Song, difficulty: Difficulty, grades: Array[int]):
+func _display_result(song: Song, difficulty: Difficulty, grades: Array[int], accuracy: float):
 	var result = result_scene.instantiate()
 	result.song = song
 	result.difficulty = difficulty
 	result.grades = grades
+	result.accuracy = accuracy
 	await change_screen(result)
 	
 	state = "result"
@@ -128,7 +129,7 @@ func _play_level(song: Song, diff: Difficulty) -> void:
 	var level = level_scene.instantiate()
 	level.song = song
 	level.difficulty = diff
-	level.song_finished.connect(_on_level_song_finished)
+	level.song_finished.connect(_display_result)
 
 	await change_screen(level)
 	level.start()
@@ -137,5 +138,3 @@ func _display_settings():
 	await change_screen(settings_scene.instantiate())
 	state = "settings"
 
-func _on_level_song_finished(song: Song, difficulty: Difficulty, grades: Array[int]):
-	_display_result(song, difficulty, grades)
