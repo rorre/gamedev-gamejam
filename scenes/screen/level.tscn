@@ -14,12 +14,16 @@ offset_bottom = 720.0
 script = ExtResource("1_x7rfd")
 
 [node name="Playfield" parent="." instance=ExtResource("2_82881")]
+z_index = 10
+z_as_relative = false
 layout_mode = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"Song"
 
 [node name="HUD" type="Control" parent="."]
+z_index = 10
+z_as_relative = false
 anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
@@ -46,5 +50,13 @@ offset_top = 240.0
 offset_right = -234.5
 offset_bottom = 360.0
 
+[node name="ParticleTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Progress" type="Line2D" parent="."]
+z_index = 99
+points = PackedVector2Array(0, 720, 1280, 720)
+
 [connection signal="note_judged" from="Playfield" to="." method="_on_playfield_note_judged"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
+[connection signal="timeout" from="ParticleTimer" to="." method="_on_particle_timer_timeout"]

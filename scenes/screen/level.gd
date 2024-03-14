@@ -1,7 +1,7 @@
 extends Control
 class_name Level
 
-signal song_finished(song: Song, difficulty: Difficulty, grades: Array[int])
+signal song_finished(song: Song, difficulty: Difficulty, grades: Array[int], accuracy: float)
 
 @export var song: Song
 @export var difficulty: Difficulty
@@ -11,9 +11,11 @@ signal song_finished(song: Song, difficulty: Difficulty, grades: Array[int])
 var grades: Array[int] = [0, 0, 0, 0]
 const note_hs = preload("res://assets/sfx/note.ogg")
 const tick_hs = preload("res://assets/sfx/tick.ogg")
-
+var rng = RandomNumberGenerator.new()
+const particle = preload("res://scenes/components/box_particle.tscn")
 
 func _ready():
+	rng.randomize()
 	if song and difficulty:
 		set_playing(song, difficulty)
 
@@ -56,6 +58,9 @@ func _process(delta):
 	$Playfield.set_current_time(time)
 	if song.gimmick:
 		song.gimmick.on_time_change(window, time)
+	
+	var progress = time / ($AudioStreamPlayer.stream.get_length() * 1000.0)
+	$Progress.scale = Vector2(progress, 1)
 
 
 func _on_playfield_note_judged(judgement: int, type: Note.NoteType) -> void:
@@ -63,8 +68,8 @@ func _on_playfield_note_judged(judgement: int, type: Note.NoteType) -> void:
 
 	var sum_notes = grades.reduce(func(acc, e): return acc + e, 0)
 	var acc = (grades[3] * 1 + grades[2] * 0.75 + grades[1] * 0.5) / sum_notes * 100
-	var rounded = snapped(acc, 0.01)
-	$HUD/Accuracy.text = "%.2f%%" % rounded
+	var accuracy = snapped(acc, 0.01)
+	$HUD/Accuracy.text = "%.2f%%" % accuracy
 	
 	if judgement == 0:
 		return
@@ -84,4 +89,26 @@ func _on_playfield_note_judged(judgement: int, type: Note.NoteType) -> void:
 func _on_audio_stream_player_finished():
 	if song.gimmick:
 		song.gimmick.cleanup(window)
-	song_finished.emit(song, difficulty, grades)
+	
+	var real_acc = (grades[3] * 1 + grades[2] * 0.75 + grades[1] * 0.5) / $Playfield.total_notes * 100
+	song_finished.emit(song, difficulty, grades, real_acc)
+
+
+func _on_particle_timer_timeout() -> void:
+	var tween = create_tween()
+	for _i in range(rng.randi_range(5, 10)):
+		var p: Line2D = particle.instantiate()
+		p.rotation_degrees = 45;
+		
+		var scale = rng.randf_range(0.25,0.75)
+		var x = rng.randi_range(0, 1280)
+		p.position = Vector2(x, 900)
+		p.scale = Vector2(scale, scale)
+		p.z_index = 0
+		p.self_modulate.a = 0.5
+		p.modulate.a = 0.5
+		tween.tween_property(p, "position", Vector2(x, -100), rng.randf_range(5, 10))
+		tween.tween_callback(p.queue_free)
+		
+		add_child(p)
+	tween.play()
