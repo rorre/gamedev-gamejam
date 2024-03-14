@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://drsuru36ofrd5"]
+
+[node name="BoxParticle" type="Line2D"]
+points = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
+closed = true
+default_color = Color(1, 1, 1, 0.490196)
