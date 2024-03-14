@@ -18,14 +18,14 @@ grow_vertical = 2
 color = Color(0.211765, 0.211765, 0.211765, 1)
 script = ExtResource("1_t8kkp")
 
-[node name="Control" type="Control" parent="."]
+[node name="Guide" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0.490196)
 anchors_preset = 0
 offset_top = 610.0
 offset_right = 400.0
 offset_bottom = 720.0
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="Guide"]
 z_index = 31
 layout_mode = 1
 offset_right = 100.0
@@ -36,7 +36,7 @@ text = "D"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="Control"]
+[node name="Label2" type="Label" parent="Guide"]
 z_index = 31
 layout_mode = 1
 offset_left = 100.0
@@ -48,7 +48,7 @@ text = "F"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="Control"]
+[node name="Label3" type="Label" parent="Guide"]
 z_index = 31
 layout_mode = 1
 offset_left = 200.0
@@ -61,7 +61,7 @@ text = "J
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label4" type="Label" parent="Control"]
+[node name="Label4" type="Label" parent="Guide"]
 z_index = 31
 layout_mode = 1
 offset_left = 300.0
@@ -92,7 +92,7 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Judgement" type="Label" parent="."]
-z_index = 30
+z_index = 32
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -110,6 +110,7 @@ vertical_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="JudgementBar" type="Control" parent="."]
+z_index = 15
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -152,6 +153,7 @@ offset_bottom = 610.0
 color = Color(0.960784, 0.662745, 0.721569, 1)
 
 [node name="Flashes" type="Control" parent="."]
+z_index = 15
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
