@@ -3,12 +3,14 @@ extends Control
 signal note_judged(judgement: int, type: Note.NoteType)
 
 @export var current_time: int = 0
+@export var total_notes: int = 0
 @onready var settings = get_node("/root/UserSettings")
 
 var flashes: Array[ColorRect]
 var queue: Array[Note] = []
 var ticks_queue: Array[Note] = []
 const note = preload("res://scenes/components/note.tscn")
+const particle = preload("res://scenes/components/box_particle.tscn")
 const inputs = ["col_1", "col_2", "col_3", "col_4"]
 
 enum InputType { TAP, HOLD }
@@ -31,6 +33,7 @@ func generate_ticks(slider: Note):
 		tick.set_type("tick")
 
 		ticks_queue.append(tick)
+		total_notes += 1
 
 
 func find_earliest_from_col(note_queue: Array[Note], col: int) -> Note:
@@ -107,6 +110,7 @@ func _ready() -> void:
 	tween.tween_property($Guide, "modulate:a", 0, 1)
 
 func reset():
+	total_notes = 0
 	for obj in queue:
 		obj.queue_free()
 	
@@ -135,6 +139,8 @@ func load_chart(chart_file: Resource):
 
 		if data[2] == "slider":
 			generate_ticks(obj)
+		else:
+			total_notes += 1
 
 		queue.append(obj)
 
@@ -148,6 +154,21 @@ func compare_note_time(a: Note, b: Note):
 
 var previous_flashed: Array[int] = []
 
+func note_hit_particle(col: int):
+	var p: Line2D = particle.instantiate()
+	p.scale = Vector2(0.0, 0.0)
+	p.position = Vector2(col * 100 + 50, 605)
+	p.z_index = 50
+	p.width = 2
+	add_child(p)
+	
+	var tween = create_tween()
+	tween.tween_property(p, "position", Vector2(col * 100 + 50, 600 - 50), 0.1)
+	tween.parallel().tween_property(p, "rotation_degrees", 45, 0.1)
+	tween.parallel().tween_property(p, "scale", Vector2(1.0, 1.0), 0.1)
+	tween.tween_property(p, "self_modulate:a", 0, 0.1)
+	tween.tween_callback(p.queue_free)
+	tween.play()
 
 func _process_click():
 	var flashed_cols: Array[int] = []
@@ -162,6 +183,7 @@ func _process_click():
 			for j in range(clicked.col, clicked.col + clicked.colsize):
 				flashed_cols.append(j)
 				flash_col(j)
+				note_hit_particle(j)
 			i = clicked.col + clicked.colsize
 			continue
 
@@ -268,3 +290,4 @@ func _on_note_judged(judgement: int, type: Note.NoteType) -> void:
 		message = ""
 
 	$Judgement.text = message
+
