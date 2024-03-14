@@ -12,6 +12,7 @@ var songs: Array[Song] = [
 		{
 			"artist": "iyowa",
 			"title": "一千光年",
+			"bpm": 192,
 			"jacket": "res://songs/issen_kounen/jacket.png",
 			"audio": "res://songs/issen_kounen/audio.mp3",
 			"difficulties": [
@@ -53,6 +54,7 @@ func _ready() -> void:
 				{
 					"artist": "ああああ",
 					"title": "コドモチック・フィロソフィ",
+					"bpm": 190,
 					"jacket": "res://songs/childish/jacket.jpg",
 					"audio": "res://songs/childish/audio.mp3",
 					"difficulties":
@@ -70,6 +72,7 @@ func _ready() -> void:
 				{
 					"artist": "DM DOKURO",
 					"title": "Reality Check Through The Skull",
+					"bpm": 260,
 					"jacket": "res://songs/reality_check/jacket.jpg",
 					"audio": "res://songs/reality_check/audio.mp3",
 					"difficulties": [

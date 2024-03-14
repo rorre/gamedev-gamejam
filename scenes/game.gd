@@ -100,12 +100,13 @@ func _display_song_select():
 	state = "select"
 
 
-func _display_result(song: Song, difficulty: Difficulty, grades: Array[int], accuracy: float):
+func _display_result(song: Song, difficulty: Difficulty, grades: Array[int], accuracy: float, max_combo: int):
 	var result = result_scene.instantiate()
 	result.song = song
 	result.difficulty = difficulty
 	result.grades = grades
 	result.accuracy = accuracy
+	result.max_combo = max_combo
 	await change_screen(result)
 	
 	state = "result"

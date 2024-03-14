@@ -1,7 +1,7 @@
 extends Control
 class_name Level
 
-signal song_finished(song: Song, difficulty: Difficulty, grades: Array[int], accuracy: float)
+signal song_finished(song: Song, difficulty: Difficulty, grades: Array[int], accuracy: float, max_combo: int)
 
 @export var song: Song
 @export var difficulty: Difficulty
@@ -9,6 +9,8 @@ signal song_finished(song: Song, difficulty: Difficulty, grades: Array[int], acc
 
 # [miss, good, great, perfect]
 var grades: Array[int] = [0, 0, 0, 0]
+var combo = 0
+var best_combo = 0
 const note_hs = preload("res://assets/sfx/note.ogg")
 const tick_hs = preload("res://assets/sfx/tick.ogg")
 var rng = RandomNumberGenerator.new()
@@ -16,6 +18,8 @@ const particle = preload("res://scenes/components/box_particle.tscn")
 
 func _ready():
 	rng.randomize()
+	UserSettings.speed_change.connect(_on_speed_change)
+	_on_speed_change(UserSettings.effective_speed)
 	if song and difficulty:
 		set_playing(song, difficulty)
 
@@ -26,6 +30,7 @@ func set_playing(song: Song, difficulty: Difficulty):
 
 	$HUD/SongDetail.song = song
 	$HUD/SongDetail.difficulty = difficulty
+	$HUD/BPM/Value.text = str(song.bpm)
 
 
 func start():
@@ -72,8 +77,13 @@ func _on_playfield_note_judged(judgement: int, type: Note.NoteType) -> void:
 	$HUD/Accuracy.text = "%.2f%%" % accuracy
 	
 	if judgement == 0:
+		combo = 0
 		return
-		
+
+	combo += 1
+	best_combo = max(combo, best_combo)
+	$HUD/Combo/Value.text = str(best_combo)
+
 	var sfx_player = AudioStreamPlayer.new()
 	if type == Note.NoteType.TICK:
 		sfx_player.stream = tick_hs
@@ -86,12 +96,13 @@ func _on_playfield_note_judged(judgement: int, type: Note.NoteType) -> void:
 	await sfx_player.finished
 	sfx_player.queue_free()
 
+
 func _on_audio_stream_player_finished():
 	if song.gimmick:
 		song.gimmick.cleanup(window)
 	
 	var real_acc = (grades[3] * 1 + grades[2] * 0.75 + grades[1] * 0.5) / $Playfield.total_notes * 100
-	song_finished.emit(song, difficulty, grades, real_acc)
+	song_finished.emit(song, difficulty, grades, real_acc, best_combo)
 
 
 func _on_particle_timer_timeout() -> void:
@@ -112,3 +123,8 @@ func _on_particle_timer_timeout() -> void:
 		
 		add_child(p)
 	tween.play()
+
+
+func _on_speed_change(value: float):
+	$HUD/Speed/Value.text = "%.2f" % value
+

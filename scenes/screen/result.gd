@@ -6,12 +6,14 @@ class_name Result
 # [miss, good, great, perfect
 @export var grades: Array[int]
 @export var accuracy: float
+@export var max_combo: int
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$TopSection/SongDetail.song = song
 	$TopSection/SongDetail.difficulty = difficulty
+	$AccuracyBox/Combo/Value.text = str(max_combo)
 	
 	$StatsBox/PerfectCount.text = str(grades[3])
 	$StatsBox/GreatCount.text = str(grades[2])

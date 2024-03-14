@@ -50,6 +50,75 @@ offset_top = 240.0
 offset_right = -234.5
 offset_bottom = 360.0
 
+[node name="BPM" type="HFlowContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 584.0
+offset_right = 272.0
+offset_bottom = 604.0
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="HUD/BPM"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_qkeaq")
+theme_override_font_sizes/font_size = 20
+text = "BPM"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="HUD/BPM"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_qkeaq")
+theme_override_font_sizes/font_size = 20
+text = "200"
+vertical_alignment = 1
+
+[node name="Speed" type="HFlowContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 552.0
+offset_right = 272.0
+offset_bottom = 577.0
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="HUD/Speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_qkeaq")
+theme_override_font_sizes/font_size = 20
+text = "Speed "
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="HUD/Speed"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_qkeaq")
+theme_override_font_sizes/font_size = 20
+text = "10.0"
+vertical_alignment = 1
+
+[node name="Combo" type="HFlowContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 1040.0
+offset_top = 56.0
+offset_right = 1280.0
+offset_bottom = 88.0
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="HUD/Combo"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_qkeaq")
+theme_override_font_sizes/font_size = 32
+text = "MAX"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="HUD/Combo"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_qkeaq")
+theme_override_font_sizes/font_size = 32
+text = "0"
+vertical_alignment = 1
+
 [node name="ParticleTimer" type="Timer" parent="."]
 autostart = true
 
