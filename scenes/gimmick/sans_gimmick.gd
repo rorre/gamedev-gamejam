@@ -107,7 +107,7 @@ func _init():
 
 	gimmicks.append(ChangeSpeed.new(62469, 0.25, ONE_BEAT_MS / 1000))
 	gimmicks.append_array(generate_breathe(62469, 102162))
-	gimmicks.append(ChangeSpeed.new(104941, 1, ONE_BEAT_MS * 4 / 1000))
+	gimmicks.append(ChangeSpeed.new(103085, 1, ONE_BEAT_MS / 1000))
 	gimmicks.append(MoveWindow.new(104941, 0.5, 0.55, ONE_BEAT_MS / 4 / 1000))
 	gimmicks.append(MoveWindow.new(105277, 0.45, 0.5, ONE_BEAT_MS / 4 / 1000))
 	gimmicks.append(MoveWindow.new(105623, 0.5, 0.45, ONE_BEAT_MS / 4 / 1000))
