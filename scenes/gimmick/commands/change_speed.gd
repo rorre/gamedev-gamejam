@@ -17,8 +17,8 @@ func run(window: Window) -> Tween:
 	var tween = window.create_tween()
 	tween.tween_property(
 		settings,
-		"effective_speed",
-		settings.speed * speed_change,
+		"speed_multiplier",
+		speed_change,
 		duration
 	)
 	tween.play()

@@ -11,16 +11,19 @@ const CONFIG_PATH = "user://config.ini"
 @onready var sfx_bus_idx = AudioServer.get_bus_index("SFX")
 @onready var song_bus_idx = AudioServer.get_bus_index("Song")
 
-@export var effective_speed: float = 1.0:
+var effective_speed: float = 1.0:
+	get:
+		return speed * speed_multiplier
+
+@export var speed_multiplier: float = 1.0:
 	set(new_speed):
-		effective_speed = new_speed
-		ms_window = 50.0 * (20.0 - (new_speed - 1.0))
-		speed_change.emit(new_speed)
+		speed_multiplier = new_speed
+		speed_change.emit(effective_speed)
 
 @export var speed: int = 1:
 	set(new_speed):
 		speed = new_speed
-		effective_speed = new_speed
+		speed_change.emit(effective_speed)		
 		config.set_value("settings", "speed", new_speed)
 		config.save(CONFIG_PATH)
 
@@ -49,8 +52,10 @@ const CONFIG_PATH = "user://config.ini"
 		config.save(CONFIG_PATH)
 
 var config: ConfigFile
-var ms_window = 50 * (20 - speed)
-# Called when the node enters the scene tree for the first time.
+var ms_window = (1.5 - log(effective_speed) / log(5)) * 1000:
+	get:
+		return (2.0 - log(effective_speed) / log(5)) * 1000
+
 func _ready() -> void:
 	config = ConfigFile.new()
 	var err = config.load(CONFIG_PATH)
@@ -65,3 +70,8 @@ func _ready() -> void:
 		sfx_volume = 50
 		speed = 1
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("speed_up"):
+		speed = clamp(speed + 1, 1, 20)
+	if Input.is_action_just_pressed("speed_down"):
+		speed = clamp(speed - 1, 1, 20)

@@ -36,7 +36,7 @@ func process_box():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var new_t = (t + int(delta * 1000)) % 1500
+	var new_t = (t + int(delta * 1000)) % 2500
 	if new_t < t:
 		playfield.load_chart(chart)
 		
