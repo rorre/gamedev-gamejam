@@ -52,9 +52,9 @@ var effective_speed: float = 1.0:
 		config.save(CONFIG_PATH)
 
 var config: ConfigFile
-var ms_window = (1.5 - log(effective_speed) / log(5)) * 1000:
+var ms_window = max((1.5 - log(effective_speed) / log(5)) * 1000, 0.033):
 	get:
-		return (2.0 - log(effective_speed) / log(5)) * 1000
+		return max((2.0 - log(effective_speed) / log(5)) * 1000, 0.033)
 
 func _ready() -> void:
 	config = ConfigFile.new()
