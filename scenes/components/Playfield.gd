@@ -221,7 +221,7 @@ func _handle_notes(t: float):
 			queue.remove_at(i)
 			continue
 
-		if note.time > t + settings.ms_window:
+		if note.time > t + settings.ms_window + 2000:
 			break
 
 		if not note.is_inside_tree():
@@ -239,7 +239,7 @@ func _handle_notes(t: float):
 				emit_signal("note_judged", 0, note.type)
 			continue
 
-		if not note.visible and note.time - t < (settings.ms_window + 200):
+		if not note.visible and note.time - t < (settings.ms_window + 2000):
 			note.visible = true
 
 		var orig: Vector2 = note.position
@@ -259,7 +259,7 @@ func _handle_holds(t: float):
 			ticks_queue.remove_at(i)
 			continue
 
-		if note.time > t + settings.ms_window:
+		if note.time > t + settings.ms_window + 2000:
 			break
 
 		if t > note.time + GOOD_WINDOW:
