@@ -23,7 +23,7 @@ var effective_speed: float = 1.0:
 @export var speed: int = 1:
 	set(new_speed):
 		speed = new_speed
-		speed_change.emit(effective_speed)		
+		speed_change.emit(effective_speed)
 		config.set_value("settings", "speed", new_speed)
 		config.save(CONFIG_PATH)
 

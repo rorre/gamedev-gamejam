@@ -87,10 +87,27 @@ func _ready() -> void:
 	for song in songs:
 		var box: SongBox = song_box.instantiate()
 		box.song = song
-		$SongsContainer/HBoxContainer.add_child(box)
+		$SongsContainer.add_child(box)
 		boxes.append(box)
 
+func reorder_boxes():
+	const delta_x = 350
+	const middle_x = 465
+	const middle_y = 360
+	var tween = create_tween().set_parallel(true)
+	for i in range(len(boxes)):
+		var box: Panel = boxes[i]
+		var scale_box = 0.9
+		if i == selected_idx:
+			scale_box = 1.0
+		
+		var w = 350 * scale_box
+		var h = 400 * scale_box
+		var x = middle_x + delta_x * (i - selected_idx)
+		tween.tween_property(box, "position", Vector2(x, middle_y - (h/2)), 0.5)
+		tween.tween_property(box, "scale", Vector2(scale_box, scale_box), 0.5)
 
+	tween.play()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_right"):
@@ -106,10 +123,7 @@ func _process(delta: float) -> void:
 			songs[selected_idx], songs[selected_idx].difficulties[selected_difficulty]
 		)
 
-	for box in boxes:
-		box.scale = Vector2(1, 1)
-	boxes[selected_idx].scale = Vector2(1.05, 1.05)
-
+	reorder_boxes()
 	selected_difficulty = clamp(selected_difficulty, 0, len(songs[selected_idx].difficulties) - 1)
 	for box in boxes:
 		box.set_diff_idx(clamp(selected_difficulty, 0, len(box.song.difficulties) - 1))

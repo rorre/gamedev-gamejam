@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dnax34l4q4i8a" path="res://assets/s.png" id="5_2ds01"]
 
 [node name="Song Select" type="Control"]
+clip_contents = true
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
 anchors_preset = 0
@@ -147,15 +148,7 @@ vertical_alignment = 1
 position = Vector2(912, 40)
 texture = ExtResource("5_2ds01")
 
-[node name="SongsContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_top = 72.0
+[node name="SongsContainer" type="Control" parent="."]
+anchors_preset = 0
 offset_right = 1280.0
-offset_bottom = 648.0
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SongsContainer"]
-custom_minimum_size = Vector2(0, 400)
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
+offset_bottom = 720.0
