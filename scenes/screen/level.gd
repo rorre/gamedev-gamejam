@@ -30,7 +30,7 @@ func set_playing(song: Song, difficulty: Difficulty):
 
 	$HUD/SongDetail.song = song
 	$HUD/SongDetail.difficulty = difficulty
-	$HUD/BPM/Value.text = str(song.bpm)
+	$HUD/BPM/Value.text = str(song.bpm[0][1])
 
 
 func start():
@@ -66,7 +66,10 @@ func _process(delta):
 	
 	var progress = time / ($AudioStreamPlayer.stream.get_length() * 1000.0)
 	$Progress.scale = Vector2(progress, 1)
-
+	
+	if len(song.bpm) >= 1 and time > song.bpm[0][0]:
+		var new_bpm = song.bpm.pop_front()
+		$HUD/BPM/Value.text = str(new_bpm[1])
 
 func _on_playfield_note_judged(judgement: int, type: Note.NoteType) -> void:
 	grades[judgement] += 1

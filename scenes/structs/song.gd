@@ -21,7 +21,7 @@ class_name Song
 @export var audio: String
 @export var difficulties: Array[Difficulty]
 @export var gimmick: Node
-@export var bpm: int
+@export var bpm: Array
 
 
 static func parse_json(song: Variant) -> Song:
