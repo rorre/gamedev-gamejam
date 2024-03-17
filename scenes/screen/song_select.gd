@@ -270,7 +270,10 @@ func _ready() -> void:
 					"jacket": "res://songs/aleph/jacket.png",
 					"audio": "res://songs/aleph/audio.mp3",
 					"difficulties": [
-						{"rating": "14", "chart": "res://songs/aleph/master.json", "color": master }
+						{"rating": "5", "chart": "res://songs/aleph/beginner.json", "color": beginner },
+						{"rating": "9", "chart": "res://songs/aleph/advanced.json", "color": advanced },
+						{"rating": "11", "chart": "res://songs/aleph/expert.json", "color": expert },
+						{"rating": "14", "chart": "res://songs/aleph/master.json", "color": master },
 					],
 					"gimmick": AlephGimmick.new()
 				}
