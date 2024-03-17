@@ -231,7 +231,7 @@ func _handle_notes(t: float):
 		if t - note.time > MISS_WINDOW and note.type == 1:
 			note.clicked = true
 
-		if t - note.time > MISS_WINDOW and t - note.end_time > 200:
+		if t - note.time > MISS_WINDOW and t - note.end_time > MISS_WINDOW:
 			note.queue_free()
 			queue.remove_at(i)
 
