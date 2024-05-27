@@ -7,6 +7,7 @@ const settings_scene = preload("res://scenes/screen/settings.tscn")
 const prestart_scene = preload("res://scenes/screen/prestart.tscn")
 const splash_scene = preload("res://scenes/screen/splash.tscn")
 const popup = preload("res://scenes/components/popup.tscn")
+const toast = preload("res://scenes/components/toast.tscn")
 
 var exit_popup: CanvasLayer
 var current_screen: Control
@@ -79,6 +80,8 @@ func _process(delta: float) -> void:
 
 func _ready() -> void:
 	_display_splash()
+	Cheat.on_cheat_toggled.connect(_on_cheat)
+	UserSettings.speed_change.connect(_on_speed_change)
 
 
 func _display_splash():
@@ -139,3 +142,25 @@ func _display_settings():
 	await change_screen(settings_scene.instantiate())
 	state = "settings"
 
+func _on_cheat(cheat_name: String, value: bool):
+	if value:
+		show_toast("Cheat enabled: " + cheat_name)
+	else:
+		show_toast("Cheat disabled: " + cheat_name)
+
+func _on_speed_change(new_speed: int):
+	show_toast("Speed changed: %d" % new_speed)
+
+func show_toast(message: String):
+	var toast_instance = toast.instantiate()
+	toast_instance.find_child("Message").text = message
+	
+	var toast_size = toast_instance.size
+	toast_instance.position = Vector2(1280, 720 - toast_size.y)
+	add_child(toast_instance)
+	
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(toast_instance, "position:x", 1280 - toast_size.x * 1.5, 1)
+	tween.tween_property(toast_instance, "modulate:a", 0, 1)
+	tween.parallel().tween_property(toast_instance, "position:y", 720 - toast_size.y * 2, 1)
+	tween.tween_callback(toast_instance.queue_free)

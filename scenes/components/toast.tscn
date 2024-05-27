@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://pvkhxqq0l5ee"]
+
+[ext_resource type="FontFile" uid="uid://7e16sc06y4ss" path="res://assets/MintsodaLimeGreen13X16Regular-4n30l.ttf" id="1_7cnru"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qv85d"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Toast" type="PanelContainer"]
+offset_right = 175.0
+offset_bottom = 39.0
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qv85d")
+
+[node name="Panel" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="Message" type="Label" parent="Panel"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_7cnru")
+text = "Toast message!"
