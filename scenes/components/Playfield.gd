@@ -246,7 +246,7 @@ func _handle_notes(t: float):
 		var orig_size: Vector2 = note.size
 		var percentage = 1.0 - (note.time - t) / settings.ms_window
 		note.position = Vector2(orig.x, 605 * percentage - orig_size.y)
-		if Cheat.cheat_state["hidden"]:
+		if Cheat.cheat_state["hidden"] and note.type == Note.NoteType.NOTE:
 			var actual_percentage = 1.0 - (note.end_time - t) / settings.ms_window
 			note.self_modulate.a = 1.0 - actual_percentage
 		i += 1
