@@ -1,5 +1,13 @@
 # unnamed VSRG
 
+## UAS Changes
+
+- Added hidden cheat code: Type in "ilovehidden" anywhere to toggle hidden in gameplay
+- Added toast when speed changes and cheats toggled
+- Disabled VSync to reduce input latency caused by waiting for vertical sync to finish before processing another frame
+
+----------------
+
 A game for Individual Game Jam CSUI 2024.
 
 ## Requirements
