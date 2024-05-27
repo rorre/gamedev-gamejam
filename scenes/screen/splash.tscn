@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3pv7tkdmbke3"]
+[gd_scene load_steps=7 format=3 uid="uid://b3pv7tkdmbke3"]
 
+[ext_resource type="Script" path="res://scenes/screen/splash.gd" id="1_21w1r"]
 [ext_resource type="Texture2D" uid="uid://bwega2ierjl7y" path="res://assets/logo.png" id="1_b0al5"]
 [ext_resource type="FontFile" uid="uid://b407p00l3rndu" path="res://assets/PressStart2P-Regular.ttf" id="2_84nlh"]
+[ext_resource type="Texture2D" uid="uid://duxit6bk4hnq6" path="res://assets/avatar.png" id="3_gt2ad"]
+[ext_resource type="Texture2D" uid="uid://dn0pn7po8phm" path="res://assets/makaraui.png" id="4_go7xd"]
+[ext_resource type="Texture2D" uid="uid://bkaguhgt48yjr" path="res://assets/makara-fasilkom.png" id="5_icr25"]
 
 [node name="Splash" type="Control"]
 layout_mode = 3
@@ -10,8 +14,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_21w1r")
 
-[node name="Control2" type="Control" parent="."]
+[node name="Title" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(389, 220)
 layout_mode = 1
 anchors_preset = 8
@@ -26,24 +32,169 @@ offset_bottom = 140.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Title"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 40
 
-[node name="Control" type="Control" parent="Control2/VBoxContainer"]
+[node name="Control" type="Control" parent="Title/VBoxContainer"]
 custom_minimum_size = Vector2(389, 220)
 layout_mode = 2
 
-[node name="Logo" type="Sprite2D" parent="Control2/VBoxContainer/Control"]
+[node name="Logo" type="Sprite2D" parent="Title/VBoxContainer/Control"]
 position = Vector2(194, 110)
 texture = ExtResource("1_b0al5")
 
-[node name="Label" type="Label" parent="Control2/VBoxContainer"]
+[node name="Label" type="Label" parent="Title/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_84nlh")
 theme_override_font_sizes/font_size = 20
 text = "Press enter to start"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Developer" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(389, 220)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.5
+offset_top = -140.5
+offset_right = 200.5
+offset_bottom = 140.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Developer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 40
+
+[node name="Control" type="Control" parent="Developer/VBoxContainer"]
+custom_minimum_size = Vector2(389, 220)
+layout_mode = 2
+
+[node name="Logo" type="Sprite2D" parent="Developer/VBoxContainer/Control"]
+position = Vector2(194, 110)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_gt2ad")
+
+[node name="Label" type="Label" parent="Developer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_84nlh")
+theme_override_font_sizes/font_size = 20
+text = "rorre"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fasilkom" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(1400, 720)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+
+[node name="Control" type="HBoxContainer" parent="Fasilkom"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1300.0
+offset_top = 600.0
+offset_right = 2836.0
+offset_bottom = 1337.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="MakaraUI" type="TextureRect" parent="Fasilkom/Control"]
+layout_mode = 2
+texture = ExtResource("4_go7xd")
+expand_mode = 3
+
+[node name="Sprite2D" type="TextureRect" parent="Fasilkom/Control"]
+layout_mode = 2
+texture = ExtResource("5_icr25")
+
+[node name="Attributions" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Attributions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Attributions/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Attributions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_84nlh")
+theme_override_font_sizes/font_size = 32
+text = "Songs by"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Attributions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_84nlh")
+theme_override_font_sizes/font_size = 24
+text = "- iyowa
+- ああああ 
+- DM Dokuro
+- LeaF"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Attributions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_84nlh")
+theme_override_font_sizes/font_size = 32
+text = "Fonts by"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Attributions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_84nlh")
+theme_override_font_sizes/font_size = 24
+text = "- Mintsoda-15
+- CodeMan38"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Attributions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_84nlh")
+theme_override_font_sizes/font_size = 32
+text = "Assets by"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="Attributions/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_84nlh")
+theme_override_font_sizes/font_size = 24
+text = "me! (rorre)"
+horizontal_alignment = 1
