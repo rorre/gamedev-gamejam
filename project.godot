@@ -19,6 +19,7 @@ config/icon="res://logo.png"
 [autoload]
 
 UserSettings="*res://scenes/structs/settings.gd"
+Cheat="*res://scenes/structs/cheat.gd"
 
 [display]
 
